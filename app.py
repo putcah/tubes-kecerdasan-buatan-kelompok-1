@@ -8,7 +8,7 @@ import streamlit as st
 from src.common import ROOT, FEATURES, NUMERIC, TARGET, load_data, splits, validate_inputs
 
 st.set_page_config(page_title='K01 | Predictive Maintenance', page_icon='⚙️', layout='wide')
-st.markdown('''<style>.block-container{max-width:1200px;padding-top:2rem}
+st.markdown('''<style>.block-container{max-width:1200px;padding-top:4rem}
 [data-testid="stMetric"]{background:white;border:1px solid #dce5ed;border-radius:12px;padding:16px}
 h1,h2,h3{color:#142c42}</style>''', unsafe_allow_html=True)
 st.caption('KECERDASAN BUATAN · KELOMPOK 01 · PROGRES MINGGU 12')

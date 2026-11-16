@@ -62,4 +62,4 @@ Ketentuan tugas: dua PDF dosen yang dilampirkan pengguna, khususnya Panduan Deli
 - [Deploy Streamlit resmi](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app).
 - Referensi video dari pengguna: https://www.youtube.com/watch?v=qTVpbdGzKY8. Konten video tidak berhasil diakses; tidak ada klaim mengikuti rincian tutorialnya. Panduan deployment berdasarkan dokumentasi resmi Streamlit dan ketentuan PDF.
 
-Repository remote dan deployment publik **belum dibuat**. Git lokal bukan URL repository. Isi kelas dan URL di `project.json` setelah tersedia, lalu lengkapi checklist pengumpulan.
+Kelas **B**, Kelompok 01. Repository: https://github.com/putcah/tubes-kecerdasan-buatan-kelompok-1 . Deployment publik **belum dibuat**; ikuti DEPLOYMENT.md. URL aplikasi di project.json diisi setelah benar-benar aktif.

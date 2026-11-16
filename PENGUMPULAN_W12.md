@@ -17,10 +17,10 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 
 ## Perlu diselesaikan sebelum submit
 
-- [ ] Isi **kelas** di `project.json`.
+- [x] Kelas **B** sudah diisi di `project.json`.
 - [ ] Sepakati pembagian peran; ubah jika perlu. Jangan mengaku sebagai bukti kontribusi yang sudah terjadi.
-- [ ] Buat/unggah repository GitHub kelompok dan isi URL sebenarnya.
-- [ ] Isi identitas/URL lalu regenerasi PDF: `pip install -r requirements-report.txt` dan `python tools/build_report.py`.
+- [x] Repository kelompok: https://github.com/putcah/tubes-kecerdasan-buatan-kelompok-1 .
+- [x] Kelas dan URL repo sudah dimasukkan dan PDF diregenerasi. Untuk memperbarui lagi: `pip install -r requirements-report.txt` dan `python tools/build_report.py`.
 - [ ] Jalankan `python -m src.eda` dan `streamlit run app.py` pada laptop kelompok.
 - [ ] Sertakan bukti dashboard awal dari `W12/bukti_dashboard/`; bila sudah deploy sertakan screenshot Incognito dan URL aktif.
 - [ ] Unggah **W12/W12_Proposal_EDA.pdf** dan **URL repository** ke Moodle. Jika formulir mengizinkan, sertakan URL dashboard atau bukti lokal.

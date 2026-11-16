@@ -2,7 +2,7 @@ TE2514031 | GASAL 2026/2027 | PROGRES MINGGU 12
 
 # Intelligent Predictive Maintenance System
 
-**Kelompok 01 · Kelas: BELUM DIISI**<br/>Dataset AI4I 2020 (UCI ID 601) · Target: Machine failure (0/1)
+**Kelompok 01 · Kelas: B**<br/>Dataset AI4I 2020 (UCI ID 601) · Target: Machine failure (0/1)
 
 ## 1. Masalah, tujuan, dan batas sistem
 
@@ -116,7 +116,7 @@ Kurva loss train/validation di atas dihitung tanpa bobot agar dapat dibandingkan
 
 **Tersedia:** laporan 4 halaman; script EDA/preprocessing/baseline; statistik, grafik, manifest split, metrik validation, model tersimpan, README, requirements dan delapan area Streamlit. Prediksi manual/CSV memakai NN asli. GA/PSO/Fuzzy diberi status rencana.
 
-**Kelas:** BELUM DIISI. **Repository remote:** BELUM DIISI. **Dashboard publik:** BELUM DEPLOY. Git lokal tersedia pada workspace; URL repository dan deployment perlu dilengkapi. W12 mengizinkan bukti aplikasi awal lokal; URL skeleton dicantumkan bila tersedia.
+**Kelas:** B. **Repository remote:** https://github.com/putcah/tubes-kecerdasan-buatan-kelompok-1. **Dashboard publik:** BELUM DEPLOY. URL repository sudah dicantumkan; deployment publik belum dilakukan. W12 mengizinkan bukti aplikasi awal lokal; URL skeleton dicantumkan bila tersedia.
 
 Reproduksi (Python 3.12): pip install -r requirements.txt; python -m src.eda; python -m src.train_baseline --seed 42; streamlit run app.py. Unggah PDF progres dan URL repo ke Moodle; tenggat resmi mengikuti Moodle/pengampu.
 
