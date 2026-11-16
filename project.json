@@ -1,0 +1,12 @@
+{
+  "group": 1,
+  "class": "BELUM DIISI",
+  "repository_url": "BELUM DIISI",
+  "deployment_url": "BELUM DEPLOY",
+  "members": [
+    {"nim": "04231072", "name": "Putri Cahaya Lestari", "proposed_role": "Data, EDA, preprocessing dan dokumentasi"},
+    {"nim": "04231038", "name": "Hendra Firmansyah", "proposed_role": "GA, fitness dan analisis subset fitur"},
+    {"nim": "04231070", "name": "Nur Rahmad", "proposed_role": "Baseline NN, PSO dan evaluasi eksperimen"},
+    {"nim": "04221045", "name": "Ricky Alfian Ronaldo", "proposed_role": "Fuzzy, integrasi Streamlit dan deployment"}
+  ]
+}

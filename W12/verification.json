@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Split saling terpisah, lengkap, dan tidak ada label/ID sebagai fitur",
+    "Rata-rata scaler identik dengan train, bukan seluruh dataset",
+    "Prediksi artefak dan metrik validation cocok dengan hasil tersimpan",
+    "Input kosong, kategori salah dan angka infinite ditolak",
+    "Delapan halaman Streamlit dan prediksi manual lolos AppTest"
+  ],
+  "test_model_evaluation": "NOT RUN; test tetap terkunci"
+}

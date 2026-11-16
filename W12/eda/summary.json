@@ -1,0 +1,44 @@
+{
+  "rows": 10000,
+  "columns": 14,
+  "input_features": 6,
+  "class_counts": {
+    "0": 9661,
+    "1": 339
+  },
+  "failure_rate": 0.0339,
+  "missing_cells": 0,
+  "duplicated_full_rows": 0,
+  "duplicated_feature_rows": 0,
+  "excluded_features": [
+    "UDI",
+    "Product ID",
+    "TWF",
+    "HDF",
+    "PWF",
+    "OSF",
+    "RNF"
+  ],
+  "source": "https://archive.ics.uci.edu/static/public/601/ai4i+2020+predictive+maintenance+dataset.zip",
+  "sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+  "split": {
+    "train": {
+      "rows": 6000,
+      "failure": 255,
+      "UDI_min": 1,
+      "UDI_max": 6000
+    },
+    "validation": {
+      "rows": 2000,
+      "failure": 45,
+      "UDI_min": 6001,
+      "UDI_max": 8000
+    },
+    "test": {
+      "rows": 2000,
+      "failure": 39,
+      "UDI_min": 8001,
+      "UDI_max": 10000
+    }
+  }
+}

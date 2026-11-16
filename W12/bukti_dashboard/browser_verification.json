@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "type": "local browser",
+  "manual_prediction": true,
+  "csv_prediction": true,
+  "invalid_csv_rejected": true,
+  "public_deployment": false
+}
