@@ -4,6 +4,19 @@ Paket progres Minggu 12 mata kuliah TE2514031, Gasal 2026/2027. Data: AI4I 2020,
 
 **Berkas pengumpulan:** [Laporan PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
 
+## Proposal dengan format laporan mahasiswa
+
+Versi lengkap atas permintaan kelompok, menggunakan identitas **Institut Teknologi Kalimantan**, Kelompok 1 Kelas B:
+
+- [Unduh proposal Word (.docx)](W12/W12_Proposal_Progres_KelasB_Kelompok01.docx)
+- [Buka proposal PDF (.pdf)](W12/W12_Proposal_Progres_KelasB_Kelompok01.pdf)
+
+Dokumen lengkap terdiri dari 17 halaman: sampul, kata pengantar, daftar isi, BAB I Pendahuluan, BAB II Tinjauan Pustaka, BAB III Metodologi dan Rancangan Sistem, BAB IV Progres dan Hasil Awal, BAB V Penutup, dan daftar pustaka. Tata tulis: A4, Times New Roman 12, spasi 1,5, margin kiri 4 cm serta atas/kanan/bawah 3 cm. Tabel memakai spasi tunggal dan ukuran lebih kecil. Bagian awal memakai angka Romawi; isi memakai angka Arab. Program studi dan fakultas tidak ditambahkan karena belum dikonfirmasi.
+
+**Ketentuan pengumpulan:** panduan dosen meminta PDF W12 sepanjang 2–4 halaman. Karena itu, `W12_Proposal_EDA.pdf` yang berjumlah 4 halaman tetap tersedia untuk pengumpulan yang menerapkan batas tersebut. Versi 17 halaman adalah proposal/progres dengan struktur laporan mahasiswa yang lebih lengkap. Keduanya memakai hasil eksperimen yang sama; tidak ada klaim bahwa GA, PSO, Fuzzy, atau deployment publik telah selesai.
+
+Word dapat diedit. Nomor daftar isi sudah disesuaikan dengan PDF saat dibuat; jika isi atau tata letak diubah, sesuaikan kembali daftar isi sebelum mengekspor PDF. Teks sumber tersedia pada [versi Markdown](W12/W12_Proposal_Progres_KelasB_Kelompok01.md). Generator Word: `python tools/build_proposal_mahasiswa.py` setelah memasang `requirements-proposal.txt`; ekspor PDF melalui Word/LibreOffice.
+
 ## Jalankan cepat
 
 Gunakan Python **3.12**. Dari folder yang berisi `app.py`:

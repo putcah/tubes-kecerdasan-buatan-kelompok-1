@@ -13,6 +13,7 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 - [x] Script modular, README dan requirements.
 - [x] Kerangka Streamlit dengan prediksi manual/CSV yang berfungsi.
 - [x] Laporan PDF 4 halaman; teks Markdown dan script pembuat laporan tersedia.
+- [x] Proposal/progres format laporan mahasiswa (17 halaman) tersedia dalam Word dan PDF; gunakan versi 4 halaman jika batas 2–4 halaman pada panduan tetap diterapkan.
 - [x] Usulan pembagian peran untuk disepakati anggota.
 
 ## Perlu diselesaikan sebelum submit
