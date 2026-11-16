@@ -1,0 +1,401 @@
+{
+  "sections": [
+    {
+      "heading": "1. Latar Belakang dan Tujuan",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Data suhu, kecepatan putaran, torsi, dan keausan alat dapat digunakan untuk mengenali kegagalan mesin. Pada tugas besar ini, data tersebut diolah menjadi prediksi status mesin yang kemudian membantu menentukan prioritas perawatan."
+        },
+        {
+          "type": "paragraph",
+          "text": "Pada minggu ke-12, pengerjaan difokuskan pada pemahaman data, pengolahan awal, dan pembangunan model Neural Network (NN). Model awal ini menjadi pembanding bagi model yang menggunakan GA, PSO, serta gabungan keduanya. Seluruh percobaan akan memakai pembagian data yang sama agar pengaruh setiap metode dapat dinilai secara setara."
+        },
+        {
+          "type": "note",
+          "text": "Prediksi hanya menunjukkan status kegagalan pada satu pengamatan, bukan waktu menuju kerusakan atau sisa umur mesin. Karena datanya sintetis dan probabilitas model belum dikalibrasi, hasil awal belum dapat langsung digunakan untuk mengambil keputusan di industri."
+        }
+      ]
+    },
+    {
+      "heading": "2. Rancangan Sistem",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Pengembangan dilakukan bertahap sebagaimana ditunjukkan pada tabel berikut."
+        },
+        {
+          "type": "table",
+          "title": "Tahapan pengembangan sistem",
+          "widths": [
+            3.2,
+            12.8
+          ],
+          "rows": [
+            [
+              "Tahap",
+              "Kegiatan"
+            ],
+            [
+              "Minggu 12",
+              "Data UCI diperiksa, dibagi, dan diolah sebelum digunakan untuk melatih MLP. Hasil prediksinya kemudian ditampilkan melalui dashboard Streamlit awal."
+            ],
+            [
+              "Minggu 13 sampai 15",
+              "Genetic Algorithm (GA) memilih fitur, lalu Particle Swarm Optimization (PSO) mencari pengaturan NN. Selanjutnya, Fuzzy menentukan prioritas perawatan untuk ditampilkan melalui Streamlit."
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Aplikasi menerima masukan manual atau CSV, kemudian menampilkan probabilitas kegagalan, fitur terpilih, dan prioritas Normal, Inspection, Maintenance, atau Critical. Pada minggu ke-12, prediksi masih menggunakan model awal."
+        }
+      ]
+    },
+    {
+      "heading": "3. Pembagian Tugas Kelompok",
+      "content": [
+        {
+          "type": "table",
+          "title": "Usulan tanggung jawab anggota",
+          "widths": [
+            2.5,
+            5.7,
+            7.8
+          ],
+          "rows": [
+            [
+              "NIM",
+              "Nama",
+              "Tanggung jawab"
+            ],
+            [
+              "04231072",
+              "Putri Cahaya Lestari",
+              "Mengolah data dan menyusun laporan eksplorasi."
+            ],
+            [
+              "04231038",
+              "Hendra Firmansyah",
+              "Mengembangkan GA untuk memilih fitur."
+            ],
+            [
+              "04231070",
+              "Nur Rahmad",
+              "Mengerjakan NN, PSO, dan evaluasi model."
+            ],
+            [
+              "04221045",
+              "Ricky Alfian Ronaldo",
+              "Mengerjakan Fuzzy, dashboard, dan deployment."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Pembagian ini masih berupa usulan. Setiap anggota tetap perlu memahami keseluruhan sistem untuk presentasi dan demo."
+        }
+      ]
+    },
+    {
+      "heading": "4. Data yang Digunakan",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Data berasal dari AI4I 2020 Predictive Maintenance Dataset pada UCI Machine Learning Repository, ID 601. Berkasnya memuat 10.000 pengamatan dan 14 kolom. Enam variabel digunakan sebagai masukan, sedangkan Machine failure menjadi target kegagalan."
+        },
+        {
+          "type": "table",
+          "title": "Variabel dan penggunaannya dalam model",
+          "widths": [
+            5.5,
+            3.6,
+            6.9
+          ],
+          "rows": [
+            [
+              "Variabel",
+              "Jenis dan satuan",
+              "Penggunaan"
+            ],
+            [
+              "Type",
+              "Kategori H, L, M",
+              "Jenis atau kualitas produk."
+            ],
+            [
+              "Air temperature [K]",
+              "Numerik, Kelvin",
+              "Suhu udara."
+            ],
+            [
+              "Process temperature [K]",
+              "Numerik, Kelvin",
+              "Suhu proses."
+            ],
+            [
+              "Rotational speed [rpm]",
+              "Numerik, rpm",
+              "Kecepatan rotasi."
+            ],
+            [
+              "Torque [Nm]",
+              "Numerik, Nm",
+              "Torsi."
+            ],
+            [
+              "Tool wear [min]",
+              "Numerik, menit",
+              "Keausan alat."
+            ],
+            [
+              "Machine failure",
+              "Biner, 0 atau 1",
+              "Target kegagalan mesin."
+            ],
+            [
+              "UDI dan Product ID",
+              "Identitas",
+              "Bukan masukan; UDI hanya menentukan pembagian data."
+            ],
+            [
+              "TWF, HDF, PWF, OSF, RNF",
+              "Label jenis kegagalan",
+              "Dikeluarkan agar informasi target tidak bocor."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Setiap kategori Type menjadi satu kolom indikator. Dengan demikian, lima variabel numerik dan tiga kolom kategori menghasilkan delapan masukan NN."
+        }
+      ]
+    },
+    {
+      "heading": "5. Hasil Eksplorasi Data",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Pemeriksaan awal tidak menemukan nilai kosong, duplikasi baris, maupun duplikasi kombinasi enam fitur. Namun, terdapat 9.661 pengamatan tidak gagal (96,61%) dan hanya 339 pengamatan gagal (3,39%). Perbedaan ini membuat akurasi perlu dibaca bersama kemampuan model mendeteksi kegagalan."
+        },
+        {
+          "type": "image",
+          "path": "W12/eda/target_and_order.png",
+          "caption": "Gambar 1. Distribusi target dan proporsi kegagalan menurut urutan UDI."
+        },
+        {
+          "type": "note",
+          "text": "Gambar 1 memperlihatkan perbedaan proporsi kegagalan antarblok UDI. Suhu juga dibangkitkan melalui perubahan bertahap yang saling berhubungan, sehingga pembagian mengikuti urutan data. Namun, UDI bukan waktu pengukuran yang terverifikasi. Oleh karena itu, hasilnya belum membuktikan kemampuan model pada mesin atau periode nyata yang berbeda."
+        },
+        {
+          "type": "note",
+          "text": "Statistik, pemeriksaan nilai kosong, korelasi, distribusi fitur, dan kegagalan menurut Type tersedia pada folder W12/eda. Korelasi hanya dipakai untuk mendeskripsikan data, bukan memilih fitur berdasarkan data uji."
+        }
+      ]
+    },
+    {
+      "heading": "6. Pembagian Data dan Pengolahan Awal",
+      "content": [
+        {
+          "type": "table",
+          "title": "Pembagian data berdasarkan urutan UDI",
+          "widths": [
+            3.2,
+            4.2,
+            3.1,
+            5.5
+          ],
+          "rows": [
+            [
+              "Bagian",
+              "Rentang UDI",
+              "Jumlah baris",
+              "Jumlah kegagalan"
+            ],
+            [
+              "Pelatihan",
+              "1 sampai 6000",
+              "6.000",
+              "255 (4,25%)"
+            ],
+            [
+              "Validasi",
+              "6001 sampai 8000",
+              "2.000",
+              "45 (2,25%)"
+            ],
+            [
+              "Pengujian",
+              "8001 sampai 10000",
+              "2.000",
+              "39 (1,95%)"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Pengisian nilai kosong ditentukan dari data pelatihan, menggunakan median untuk angka dan modus untuk kategori. Aturan ini tetap disimpan meskipun data lengkap. Setelah itu, StandardScaler menyetarakan skala variabel agar perbedaan satuan tidak mendominasi pelatihan."
+        },
+        {
+          "type": "note",
+          "text": "Bobot kelas diperoleh dari jumlah data pelatihan dibagi dua kali jumlah anggota kelas. Bobot kelas tidak gagal adalah 0,5222 dan kelas gagal 11,7647, sehingga kegagalan mendapat perhatian lebih besar. Data validasi dan uji tidak diperbanyak atau dikurangi."
+        },
+        {
+          "type": "note",
+          "text": "Pembagian UDI dicatat agar dapat diperiksa kembali. Data validasi memilih model dengan batas klasifikasi 0,5, sedangkan data uji tidak dipakai untuk pengolahan, pemilihan fitur, pengaturan, maupun evaluasi awal. Eksplorasi seluruh data hanya bertujuan mendeskripsikan dataset."
+        }
+      ]
+    },
+    {
+      "heading": "7. Model Awal dan Hasil Evaluasi",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Multilayer Perceptron (MLP) menerima delapan masukan, diikuti dua lapisan tersembunyi dengan 32 dan 16 unit, serta satu keluaran. Lapisan tersembunyi memakai ReLU, sedangkan sigmoid menghasilkan skor probabilitas antara 0 dan 1. Model memiliki 833 parameter."
+        },
+        {
+          "type": "note",
+          "text": "Pelatihan memakai Adam dengan learning rate 0,001, batch size 128, dan regularisasi L2 0,0001 tanpa dropout. Seed 42 digunakan agar percobaan dapat diulang. Batas pelatihan adalah 150 epoch, dengan penghentian jika log loss validasi tidak membaik selama 20 epoch. Model terbaik diperoleh pada epoch 150."
+        },
+        {
+          "type": "table",
+          "title": "Perbandingan hasil pada data validasi",
+          "widths": [
+            6,
+            2.5,
+            2.5,
+            2.5,
+            2.5
+          ],
+          "rows": [
+            [
+              "Model",
+              "Accuracy",
+              "Precision",
+              "Recall",
+              "F1-score"
+            ],
+            [
+              "Selalu memprediksi tidak gagal",
+              "0,9775",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "MLP awal",
+              "0,9610",
+              "0,3012",
+              "0,5556",
+              "0,3906"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Akurasi 96,10% belum menjamin deteksi yang baik. Model mengenali 25 dari 45 kegagalan, sementara 20 terlewat. Terdapat 58 alarm keliru dan 1.897 kondisi normal yang dikenali dengan benar. Keempat nilai tersebut disajikan dalam confusion matrix pada Gambar 2."
+        },
+        {
+          "type": "note",
+          "text": "Precision 30,12% berarti sebagian besar prediksi kegagalan masih keliru, sedangkan recall 55,56% menunjukkan bagian kegagalan yang ditemukan. F1-score merangkum keduanya dengan nilai 0,3906. Average precision (0,4710) dan ROC AUC (0,9234) merangkum kinerja pada berbagai ambang prediksi, sedangkan balanced accuracy (0,7629) meratakan kemampuan mengenali kedua kelas. Sebaliknya, model yang selalu memilih tidak gagal memperoleh akurasi lebih tinggi tanpa mendeteksi kegagalan apa pun."
+        },
+        {
+          "type": "image",
+          "path": "W12/baseline/baseline_curves.png",
+          "caption": "Gambar 2. Perubahan loss selama pelatihan dan confusion matrix model awal."
+        },
+        {
+          "type": "note",
+          "text": "Kurva loss dihitung tanpa bobot agar pelatihan dan validasi dapat dibandingkan, tetapi pembaruan NN tetap memakai bobot kelas. Model dan pengolahannya disimpan dalam baseline.joblib; prediksi tetap sama setelah dimuat ulang. Satu percobaan ini belum menunjukkan pengaruh GA atau PSO."
+        }
+      ]
+    },
+    {
+      "heading": "8. Rencana Pengembangan",
+      "content": [
+        {
+          "type": "table",
+          "title": "Rencana pekerjaan minggu 13 sampai 16",
+          "widths": [
+            2.4,
+            13.6
+          ],
+          "rows": [
+            [
+              "Minggu",
+              "Rencana pekerjaan"
+            ],
+            [
+              "13",
+              "GA menggunakan kromosom enam bit, dengan Type sebagai satu variabel dan kandidat kosong ditolak. Penilaiannya memakai F1 validasi serta penalti jumlah fitur yang ditetapkan sebelumnya. Usulannya adalah populasi 20, 15 generasi, peluang persilangan 0,8, mutasi 1/6, dan dua kandidat terbaik dipertahankan. Percobaan memakai seed 11, 22, dan 33. Perubahan hasil, nilai terbaik, rata-rata, serta simpangan bakunya akan dilaporkan."
+            ],
+            [
+              "14",
+              "PSO mencari learning rate 0,0001 hingga 0,01, unit tersembunyi 16 hingga 128, dropout 0 hingga 0,5, serta batch size 32, 64, atau 128. Solusi terbaik partikel dan kelompok digunakan untuk memperbarui kecepatan serta posisi. Empat konfigurasi model dibandingkan dengan pembagian data dan anggaran percobaan yang setara serta beberapa seed terdokumentasi."
+            ],
+            [
+              "15",
+              "Fuzzy mengolah probabilitas kegagalan, keausan alat, dan torsi menjadi empat prioritas perawatan. Inferensi memakai Mamdani dan keluarannya dihitung dengan centroid. Aturan serta fungsi keanggotaan diperiksa pada kondisi normal dan ekstrem sebelum dihubungkan ke Streamlit yang dapat diakses publik."
+            ],
+            [
+              "16",
+              "Laporan akhir, slide, video, demo langsung, source code, artefak model, dan bukti kontribusi disiapkan. Demo lokal menjadi cadangan jika koneksi bermasalah."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "MLPClassifier pada minggu ke-12 belum mendukung dropout. Oleh karena itu, seluruh konfigurasi, termasuk model awal, akan dilatih ulang dengan pustaka yang mendukungnya agar perbandingan setara. Rentang pengaturan di atas masih berupa rencana."
+        }
+      ]
+    },
+    {
+      "heading": "9. Keterbatasan dan Langkah Antisipasi",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Data sintetis, sedikitnya kegagalan, dan kemungkinan model terlalu menyesuaikan data validasi menjadi keterbatasan utama. Untuk mengatasinya, jumlah percobaan dicatat, optimasi diulang dengan beberapa seed, dan data uji disimpan hingga model akhir ditetapkan. Alarm keliru serta kegagalan terlewat tetap dilaporkan karena batas 0,5 belum dioptimalkan. Versi pustaka dan model disimpan, kemudian akses publik akan diperiksa tanpa login khusus."
+        }
+      ]
+    },
+    {
+      "heading": "10. Status Pengerjaan dan Cara Menjalankan",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Progres minggu ke-12 menghasilkan kode pengolahan dan eksplorasi, model tersimpan, statistik, grafik, pembagian data, serta hasil validasi. README, daftar kebutuhan pustaka, dan delapan bagian Streamlit juga tersedia. Prediksi manual maupun CSV menggunakan NN, sementara GA, PSO, dan Fuzzy masih direncanakan."
+        },
+        {
+          "type": "note",
+          "text": "Source code Kelompok 1 Kelas B tersedia di https://github.com/putcah/tubes-kecerdasan-buatan-kelompok-1. Aplikasi masih berjalan lokal. Sesuai panduan, bukti aplikasi awal disertakan dan URL deployment dicantumkan setelah tersedia."
+        },
+        {
+          "type": "note",
+          "text": "Pada Python 3.12, dependensi dipasang dengan pip install -r requirements.txt. Selanjutnya, python -m src.eda menjalankan eksplorasi, python -m src.train_baseline --seed 42 melatih model, dan streamlit run app.py membuka dashboard. PDF dan URL repository dikumpulkan melalui Moodle sesuai tenggat pengampu."
+        }
+      ]
+    },
+    {
+      "heading": "Sumber",
+      "content": [
+        {
+          "type": "reference",
+          "text": "Panduan Deliverables Tubes KB Minggu 12 sampai 16. (2026). Halaman 1 sampai 3."
+        },
+        {
+          "type": "reference",
+          "text": "Tugas Besar KB 16 Kelompok UCI Streamlit. (2026). Halaman 5 dan 9."
+        },
+        {
+          "type": "reference",
+          "text": "UCI Machine Learning Repository. (2020). AI4I 2020 Predictive Maintenance Dataset. Lisensi CC BY 4.0. https://doi.org/10.24432/C5HS5C."
+        },
+        {
+          "type": "reference",
+          "text": "Streamlit. (t.t.). Prep and deploy your app on Community Cloud.",
+          "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app"
+        }
+      ]
+    }
+  ]
+}

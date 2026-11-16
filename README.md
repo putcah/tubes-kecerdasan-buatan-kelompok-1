@@ -1,30 +1,32 @@
-# Kelompok 01 — Intelligent Predictive Maintenance (W12)
+# Kelompok 01: Intelligent Predictive Maintenance (W12)
 
 Paket progres Minggu 12 mata kuliah TE2514031, Gasal 2026/2027. Data: AI4I 2020, UCI ID 601. Dashboard memakai **Streamlit asli**, model baseline memakai MLPClassifier (Neural Network).
 
-**Berkas pengumpulan:** [Proposal PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Proposal Word](W12/W12_Proposal_EDA.docx) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
+Berkas pengumpulan tersedia dalam [Word](W12/W12_Proposal_EDA.docx) dan [PDF](W12/W12_Proposal_EDA.pdf).
+
+Lihat juga [checklist Moodle](PENGUMPULAN_W12.md), [cara deploy](DEPLOYMENT.md), serta [catatan presentasi](CATATAN_PRESENTASI.md).
 
 ## Proposal awal minggu 12
 
-Dokumen utama telah disesuaikan dengan permintaan terakhir: **isi mengikuti PDF yang dilampirkan, sedangkan format mengikuti Word contoh**. Hasilnya tetap **4 halaman**.
+Isi laporan mengacu pada PDF yang diberikan kelompok, dengan format Word yang telah dipilih. Narasinya sudah disunting menjadi kalimat akademik yang lebih terhubung, bukan rangkaian istilah teknis. Data, angka hasil percobaan, serta rencana pengembangan tetap sama. Hasilnya **4 halaman**.
 
-- [Unduh Word hasil penyesuaian](W12/W12_Proposal_EDA.docx)
-- [Buka PDF hasil penyesuaian](W12/W12_Proposal_EDA.pdf)
+- [Unduh Word yang sudah disunting](W12/W12_Proposal_EDA.docx)
+- [Buka PDF yang sudah disunting](W12/W12_Proposal_EDA.pdf)
 
-Seluruh 10 bagian, 6 tabel isi, dan 2 grafik dari PDF dipertahankan, termasuk kamus data, hasil baseline, rencana optimasi, risiko, dan sumber. Judul serta identitas kelompok memakai susunan dari Word contoh. Dokumen tidak menggunakan susunan BAB atau sampul terpisah.
+Dokumen tetap mencakup 10 bagian, 6 tabel isi, dan 2 grafik. Penjelasan hasil kini menghubungkan angka evaluasi dengan kegagalan yang berhasil dideteksi, kegagalan yang terlewat, dan alarm keliru. Titik tengah serta em dash sebagai pemisah sudah dihapus dari laporan. Judul, identitas kelompok, font utama Times New Roman 12, dan margin 2,5 cm mengikuti format Word sebelumnya.
 
-Format: A4, Times New Roman 12, spasi utama 1,15, dan margin 2,5 cm. Tabel dan catatan mengikuti ukuran lebih kecil pada contoh Word. Isi telah dibandingkan dengan PDF sumber; grafik yang disisipkan berasal langsung dari PDF, tanpa digambar ulang.
-
-Word dapat langsung diedit. [Versi Markdown](W12/W12_Proposal_EDA.md) juga tersedia. Untuk mengulang pemformatan dengan dua dokumen sumber, pasang `requirements-report.txt`, lalu gunakan:
+Narasi dapat disunting pada Word atau pada `tools/proposal_narasi.json`. Untuk membuat ulang Word, PDF, dan Markdown, pasang `requirements-report.txt`, lalu jalankan:
 
 ```bash
-python tools/format_pdf_as_word.py --source-pdf "sumber.pdf" --template "contoh.docx" --output "hasil.docx" --assets-dir "work/aset_proposal"
+python tools/build_report.py
 ```
 
-Ganti nama berkas sesuai lokasi sumber. Ekspor PDF otomatis memerlukan LibreOffice; jika tidak tersedia, buka hasil Word lalu ekspor PDF melalui Word. `tools/build_report.py` menerima argumen yang sama. Periksa jumlah halaman setelah menyunting isi atau format.
+Ekspor PDF otomatis memerlukan LibreOffice. Jika tidak tersedia, buka hasil Word lalu ekspor sebagai PDF. [Versi Markdown](W12/W12_Proposal_EDA.md) juga tersedia. Grafik tetap memakai hasil eksperimen semula, tanpa digambar ulang.
+
+Untuk pemformatan ulang dari dua berkas sumber lain, utilitas `tools/format_pdf_as_word.py` tetap tersedia. Jalankan dengan argumen `--source-pdf`, `--template`, `--output`, dan `--assets-dir`.
 
 <details>
-<summary>Draf panjang sebelumnya — arsip</summary>
+<summary>Draf panjang sebelumnya : arsip</summary>
 
 Draf 17 halaman disimpan sebagai arsip penulisan, bukan dokumen utama untuk pengumpulan progres W12:
 
@@ -75,19 +77,19 @@ python -m src.train_baseline --seed 42
 
 Target biner `Machine failure`, bukan remaining useful life. Input: `Type` dan lima variabel numerik. `UDI`/`Product ID` dibuang sebagai identitas; `TWF/HDF/PWF/OSF/RNF` adalah label jenis kegagalan dan **tidak** boleh masuk fitur. Setelah one-hot encoding Type ada 8 input NN. Data sintetis, 10.000 baris, 339 failure, tidak ada missing values.
 
-Split tetap berdasarkan urutan UDI: train 1–6000, validation 6001–8000, test 8001–10000. UDI dipakai sebagai proxy urutan agar pola berdekatan tidak diacak ke semua split; tidak ada timestamp terverifikasi, sehingga ini **bukan bukti** evaluasi forecasting atau pemisahan antar mesin. Test tidak dipakai menghitung parameter preprocessing, bobot kelas, checkpoint atau fitness. EDA semua data bersifat audit deskriptif dan tidak dipakai memilih fitur/hiperparameter.
+Split tetap berdasarkan urutan UDI: train 1-6000, validation 6001-8000, test 8001-10000. UDI dipakai sebagai proxy urutan agar pola berdekatan tidak diacak ke semua split; tidak ada timestamp terverifikasi, sehingga ini **bukan bukti** evaluasi forecasting atau pemisahan antar mesin. Test tidak dipakai menghitung parameter preprocessing, bobot kelas, checkpoint atau fitness. EDA semua data bersifat audit deskriptif dan tidak dipakai memilih fitur/hiperparameter.
 
 Imputer dan StandardScaler fit pada train saja; kategori H/L/M berasal dari kamus data. Bobot kelas train `n_train/(2*n_class)` mengatasi imbalance tanpa oversampling validation/test. Baseline tetap `(32,16)`, ReLU, Adam, lr 0.001, batch 128, L2 0.0001, seed 42; maksimum 150 epoch, patience 20 berdasarkan log loss validation, threshold 0.5 tetap. Metrik utama F1 dan recall kelas failure, disertai precision, accuracy, confusion matrix, balanced accuracy, average precision (AP), ROC AUC.
 
 **Test belum dievaluasi** supaya dapat dipakai untuk pembandingan final yang telah dikunci. Jangan mencoba berkali-kali pada test untuk memilih konfigurasi. GA/PSO belum dikerjakan pada W12. Halamannya jelas berstatus rencana. Belum ada klaim peningkatan optimasi atau keputusan Fuzzy.
 
-## Rencana W13–W16
+## Rencana W13-W16
 
 W13 GA: enam bit, grup Type utuh; fitness F1 validation dengan penalti jumlah fitur; beberapa seed, convergence dan fitur terpilih. W14 PSO: learning rate, hidden units, dropout dan batch size; lakukan empat eksperimen dengan protokol yang setara. Karena MLPClassifier tidak mendukung dropout, rencana W14 adalah memigrasikan **seluruh** konfigurasi (termasuk baseline) ke backend NN yang mendukung dropout, lalu melatih ulang dan mencatat versinya. W15 Mamdani/centroid, uji rule dan integrasi, akses publik Streamlit. W16 laporan, slide, video dan bukti kontribusi.
 
 ## Sumber dan status
 
-Ketentuan tugas: dua PDF dosen yang dilampirkan pengguna, khususnya Panduan Deliverables halaman 1–3 dan Pembagian Tugas halaman 5/9. Tenggat mengikuti Moodle; paket disiapkan untuk progres besok sesuai permintaan pengguna, bukan hasil verifikasi jadwal Moodle.
+Ketentuan tugas: dua PDF dosen yang dilampirkan pengguna, khususnya Panduan Deliverables halaman 1-3 dan Pembagian Tugas halaman 5/9. Tenggat mengikuti Moodle; paket disiapkan untuk progres besok sesuai permintaan pengguna, bukan hasil verifikasi jadwal Moodle.
 
 - [UCI AI4I 2020](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset), DOI https://doi.org/10.24432/C5HS5C, CC BY 4.0. `data/SOURCE.md` mencatat checksum. Dataset kecil disertakan pada ZIP untuk demo lokal; `.gitignore` mencegah unggah CSV berulang ke GitHub.
 - [Deploy Streamlit resmi](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app).
