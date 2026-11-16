@@ -2,20 +2,30 @@
 
 Paket progres Minggu 12 mata kuliah TE2514031, Gasal 2026/2027. Data: AI4I 2020, UCI ID 601. Dashboard memakai **Streamlit asli**, model baseline memakai MLPClassifier (Neural Network).
 
-**Berkas pengumpulan:** [Laporan PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
+**Berkas pengumpulan:** [Proposal PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Proposal Word](W12/W12_Proposal_EDA.docx) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
 
-## Proposal dengan format laporan mahasiswa
+## Proposal awal minggu 12
 
-Versi lengkap atas permintaan kelompok, menggunakan identitas **Institut Teknologi Kalimantan**, Kelompok 1 Kelas B:
+Proposal utama sudah disusun ulang menjadi **4 halaman termasuk sampul**, sesuai batas 2–4 halaman pada panduan dosen. Identitas: Institut Teknologi Kalimantan, Kelompok 1, Kelas B.
 
-- [Unduh proposal Word (.docx)](W12/W12_Proposal_Progres_KelasB_Kelompok01.docx)
-- [Buka proposal PDF (.pdf)](W12/W12_Proposal_Progres_KelasB_Kelompok01.pdf)
+- [Unduh proposal Word yang dapat diedit](W12/W12_Proposal_EDA.docx)
+- [Buka proposal PDF untuk pengumpulan W12](W12/W12_Proposal_EDA.pdf)
 
-Dokumen lengkap terdiri dari 17 halaman: sampul, kata pengantar, daftar isi, BAB I Pendahuluan, BAB II Tinjauan Pustaka, BAB III Metodologi dan Rancangan Sistem, BAB IV Progres dan Hasil Awal, BAB V Penutup, dan daftar pustaka. Tata tulis: A4, Times New Roman 12, spasi 1,5, margin kiri 4 cm serta atas/kanan/bawah 3 cm. Tabel memakai spasi tunggal dan ukuran lebih kecil. Bagian awal memakai angka Romawi; isi memakai angka Arab. Program studi dan fakultas tidak ditambahkan karena belum dikonfirmasi.
+Susunannya adalah sampul, BAB I Pendahuluan, BAB II Metode Pengerjaan, serta BAB III Progres Awal dan Rencana Kerja, diikuti daftar pustaka. Isi mencakup tujuan, kamus data, arsitektur, split dan preprocessing, baseline NN, metrik, risiko, serta usulan pembagian tugas. Bahasa ditulis dalam paragraf yang langsung membahas pekerjaan kelompok. Tidak ada kata pengantar atau daftar isi agar dokumen tetap sesuai panjang yang diminta.
 
-**Ketentuan pengumpulan:** panduan dosen meminta PDF W12 sepanjang 2–4 halaman. Karena itu, `W12_Proposal_EDA.pdf` yang berjumlah 4 halaman tetap tersedia untuk pengumpulan yang menerapkan batas tersebut. Versi 17 halaman adalah proposal/progres dengan struktur laporan mahasiswa yang lebih lengkap. Keduanya memakai hasil eksperimen yang sama; tidak ada klaim bahwa GA, PSO, Fuzzy, atau deployment publik telah selesai.
+Format: A4, Times New Roman 12, spasi isi 1,5, margin kiri 4 cm dan atas/kanan/bawah 3 cm. Tabel serta daftar pustaka memakai ukuran lebih kecil dan spasi tunggal. Sampul tidak diberi nomor; isi bernomor 1–3. Program studi dan fakultas tidak ditambahkan karena belum dikonfirmasi. Angka hasil awal berasal dari eksperimen yang tersimpan; GA, PSO, Fuzzy dan deployment publik masih dijelaskan sebagai rencana.
 
-Word dapat diedit. Nomor daftar isi sudah disesuaikan dengan PDF saat dibuat; jika isi atau tata letak diubah, sesuaikan kembali daftar isi sebelum mengekspor PDF. Teks sumber tersedia pada [versi Markdown](W12/W12_Proposal_Progres_KelasB_Kelompok01.md). Generator Word: `python tools/build_proposal_mahasiswa.py` setelah memasang `requirements-proposal.txt`; ekspor PDF melalui Word/LibreOffice.
+Teks yang bisa disalin tersedia pada [versi Markdown](W12/W12_Proposal_EDA.md). Untuk membuat ulang, pasang `requirements-report.txt` lalu jalankan `python tools/build_report.py`. Script membuat Word dan mengekspor PDF jika LibreOffice tersedia. Jika tidak, buka Word lalu gunakan Export/Save as PDF; periksa kembali jumlah halaman setelah mengedit.
+
+<details>
+<summary>Draf panjang sebelumnya — arsip</summary>
+
+Draf 17 halaman disimpan sebagai arsip penulisan, bukan dokumen utama untuk pengumpulan progres W12:
+
+- [Word draf panjang](W12/W12_Proposal_Progres_KelasB_Kelompok01.docx)
+- [PDF draf panjang](W12/W12_Proposal_Progres_KelasB_Kelompok01.pdf)
+
+</details>
 
 ## Jalankan cepat
 
@@ -44,7 +54,7 @@ python -m src.train_baseline --seed 42
 
 ## Isi paket
 
-- `W12/W12_Proposal_EDA.pdf`: laporan 4 halaman.
+- `W12/W12_Proposal_EDA.pdf` dan `.docx`: proposal awal 4 halaman termasuk sampul.
 - `W12/W12_Proposal_EDA.md`: teks laporan yang dapat diedit.
 - `src/common.py`: kontrak enam fitur, checksum, split, preprocessing dan validasi input.
 - `src/eda.py`: unduh/checksum, ringkasan, statistik, missing values, grafik dan split manifest.
