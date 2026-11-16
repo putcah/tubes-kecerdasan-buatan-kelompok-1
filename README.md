@@ -2,20 +2,26 @@
 
 Paket progres Minggu 12 mata kuliah TE2514031, Gasal 2026/2027. Data: AI4I 2020, UCI ID 601. Dashboard memakai **Streamlit asli**, model baseline memakai MLPClassifier (Neural Network).
 
-**Berkas pengumpulan:** [Proposal PDF W12 (2 halaman)](W12/W12_Proposal_EDA.pdf) · [Proposal Word](W12/W12_Proposal_EDA.docx) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
+**Berkas pengumpulan:** [Proposal PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Proposal Word](W12/W12_Proposal_EDA.docx) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
 
 ## Proposal awal minggu 12
 
-Proposal utama sudah disusun ulang menjadi **2 halaman**, sesuai batas 2–4 halaman pada panduan dosen. Identitas: Institut Teknologi Kalimantan, Kelompok 1, Kelas B.
+Dokumen utama telah disesuaikan dengan permintaan terakhir: **isi mengikuti PDF yang dilampirkan, sedangkan format mengikuti Word contoh**. Hasilnya tetap **4 halaman**.
 
-- [Unduh proposal Word yang dapat diedit](W12/W12_Proposal_EDA.docx)
-- [Buka proposal PDF untuk pengumpulan W12](W12/W12_Proposal_EDA.pdf)
+- [Unduh Word hasil penyesuaian](W12/W12_Proposal_EDA.docx)
+- [Buka PDF hasil penyesuaian](W12/W12_Proposal_EDA.pdf)
 
-Bagian isinya: Gambaran Tugas, Data yang Dipakai, Cara Pengerjaan, Hasil Sementara, Pembagian Tugas Awal, Rencana Selanjutnya, dan Sumber. Identitas kelompok langsung diletakkan di bagian atas. Bahasa dibuat lebih langsung seperti catatan proposal/progres mahasiswa; tidak memakai susunan BAB, kata pengantar, daftar isi, atau sampul terpisah. Tujuan, kamus data, arsitektur, split, preprocessing, metrik, risiko, dan pembagian peran tetap tercakup.
+Seluruh 10 bagian, 6 tabel isi, dan 2 grafik dari PDF dipertahankan, termasuk kamus data, hasil baseline, rencana optimasi, risiko, dan sumber. Judul serta identitas kelompok memakai susunan dari Word contoh. Dokumen tidak menggunakan susunan BAB atau sampul terpisah.
 
-Format: A4, Times New Roman 12, spasi isi 1,15, dan margin 2,5 cm. Tabel, identitas, serta sumber memakai ukuran lebih kecil dan spasi tunggal. Halaman bernomor 1–2. Program studi dan fakultas tidak ditambahkan karena belum dikonfirmasi. Angka hasil awal berasal dari eksperimen yang tersimpan; GA, PSO, Fuzzy dan deployment publik masih dijelaskan sebagai rencana.
+Format: A4, Times New Roman 12, spasi utama 1,15, dan margin 2,5 cm. Tabel dan catatan mengikuti ukuran lebih kecil pada contoh Word. Isi telah dibandingkan dengan PDF sumber; grafik yang disisipkan berasal langsung dari PDF, tanpa digambar ulang.
 
-Teks yang bisa disalin tersedia pada [versi Markdown](W12/W12_Proposal_EDA.md). Untuk membuat ulang, pasang `requirements-report.txt` lalu jalankan `python tools/build_report.py`. Script membuat Word dan mengekspor PDF jika LibreOffice tersedia. Jika tidak, buka Word lalu gunakan Export/Save as PDF; periksa kembali jumlah halaman setelah mengedit.
+Word dapat langsung diedit. [Versi Markdown](W12/W12_Proposal_EDA.md) juga tersedia. Untuk mengulang pemformatan dengan dua dokumen sumber, pasang `requirements-report.txt`, lalu gunakan:
+
+```bash
+python tools/format_pdf_as_word.py --source-pdf "sumber.pdf" --template "contoh.docx" --output "hasil.docx" --assets-dir "work/aset_proposal"
+```
+
+Ganti nama berkas sesuai lokasi sumber. Ekspor PDF otomatis memerlukan LibreOffice; jika tidak tersedia, buka hasil Word lalu ekspor PDF melalui Word. `tools/build_report.py` menerima argumen yang sama. Periksa jumlah halaman setelah menyunting isi atau format.
 
 <details>
 <summary>Draf panjang sebelumnya — arsip</summary>
@@ -54,7 +60,7 @@ python -m src.train_baseline --seed 42
 
 ## Isi paket
 
-- `W12/W12_Proposal_EDA.pdf` dan `.docx`: proposal progres ringkas 2 halaman.
+- `W12/W12_Proposal_EDA.pdf` dan `.docx`: proposal 4 halaman, dengan isi PDF dan format Word yang dilampirkan.
 - `W12/W12_Proposal_EDA.md`: teks laporan yang dapat diedit.
 - `src/common.py`: kontrak enam fitur, checksum, split, preprocessing dan validasi input.
 - `src/eda.py`: unduh/checksum, ringkasan, statistik, missing values, grafik dan split manifest.

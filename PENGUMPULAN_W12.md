@@ -12,7 +12,7 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 - [x] Pipeline/model tersimpan dan hasil reload diverifikasi identik.
 - [x] Script modular, README dan requirements.
 - [x] Kerangka Streamlit dengan prediksi manual/CSV yang berfungsi.
-- [x] Proposal progres minggu 12 sebanyak 2 halaman, dengan bahasa lebih langsung dan susunan sederhana tanpa BAB; PDF, Word, Markdown, dan script tersedia.
+- [x] Proposal progres minggu 12 sebanyak 4 halaman: isi PDF dipertahankan, memakai format Word contoh; 10 bagian, 6 tabel, dan 2 grafik sudah diperiksa.
 - [x] Draf panjang sebelumnya dipisahkan sebagai arsip; dokumen pengumpulan utama adalah W12_Proposal_EDA.pdf.
 - [x] Usulan pembagian peran untuk disepakati anggota.
 
@@ -21,7 +21,7 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 - [x] Kelas **B** sudah diisi di `project.json`.
 - [ ] Sepakati pembagian peran; ubah jika perlu. Jangan mengaku sebagai bukti kontribusi yang sudah terjadi.
 - [x] Repository kelompok: https://github.com/putcah/tubes-kecerdasan-buatan-kelompok-1 .
-- [x] Kelas dan URL repo sudah dimasukkan dan PDF diregenerasi. Untuk memperbarui lagi: `pip install -r requirements-report.txt` dan `python tools/build_report.py`. Ekspor PDF otomatis memerlukan LibreOffice; jika tidak tersedia, ekspor berkas Word melalui Microsoft Word.
+- [x] Kelas dan URL repo sudah dimasukkan. Untuk menyunting, gunakan Word hasil. Untuk mengulang dari PDF dan template, ikuti perintah pemformatan di README; ekspor PDF otomatis memerlukan LibreOffice.
 - [ ] Jalankan `python -m src.eda` dan `streamlit run app.py` pada laptop kelompok.
 - [ ] Sertakan bukti dashboard awal dari `W12/bukti_dashboard/`; bila sudah deploy sertakan screenshot Incognito dan URL aktif.
 - [ ] Unggah **W12/W12_Proposal_EDA.pdf** dan **URL repository** ke Moodle. Jika formulir mengizinkan, sertakan URL dashboard atau bukti lokal.

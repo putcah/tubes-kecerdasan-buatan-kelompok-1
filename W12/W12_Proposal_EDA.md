@@ -1,7 +1,6 @@
-Proposal Progres Minggu 12
+# Proposal Progres Minggu 12
 
-Tugas Besar Kecerdasan Buatan
-Intelligent Predictive Maintenance System
+Tugas Besar Kecerdasan Buatan — Intelligent Predictive Maintenance System
 
 Kelompok 1 · Kelas B · Institut Teknologi Kalimantan
 
@@ -14,75 +13,113 @@ Nur Rahmad — 04231070
 Ricky Alfian Ronaldo — 04221045
 
 Pengampu: Ir. Muhammad Ridho Dewanto, S.T., M.T.
+
 TE2514031 · Semester Gasal 2026/2027
 
-## 1. Gambaran Tugas
+## 1. Masalah, tujuan, dan batas sistem
 
-Kelompok kami mengerjakan prediksi kegagalan mesin menggunakan data suhu, putaran, torsi, dan keausan alat. Hasil prediksi nantinya ditampilkan di dashboard Streamlit dan digunakan untuk membantu menentukan prioritas perawatan. Untuk progres minggu 12, fokus kami masih pada memahami data, menyiapkan pengolahan data, dan membuat model Neural Network (NN) awal sebagai pembanding untuk percobaan berikutnya.
+Kondisi operasi mesin dapat digunakan untuk mengidentifikasi indikasi kegagalan dan membantu penentuan prioritas perawatan. Proyek ini membangun sistem hibrida yang memetakan jenis produk dan sensor operasi ke prediksi kegagalan, kemudian ke keputusan perawatan yang dapat dijelaskan.
 
-## 2. Data yang Dipakai
+Tujuan terukur: menghasilkan baseline NN yang dapat diulang; pada tahap berikutnya membandingkan GA+NN, PSO+NN dan GA+PSO+NN memakai split tetap. Kualitas deteksi failure dinilai melalui precision, recall dan F1, disertai metrik lain. Fuzzy menjadi lapisan keputusan, bukan jaminan peningkatan akurasi.
 
-Kami menggunakan AI4I 2020 Predictive Maintenance Dataset dari UCI. Data ini berisi 10.000 baris dan 14 kolom. Enam variabel menjadi masukan model, sedangkan Machine failure menjadi target: 0 untuk tidak gagal dan 1 untuk gagal.
+Batasan: klasifikasi kondisi pada satu pengamatan, bukan prediksi waktu menuju kegagalan atau remaining useful life. Dataset sintetis; skor baseline belum dikalibrasi untuk penerapan industri.
 
-Variabel yang digunakan
+## 2. Rancangan arsitektur
 
-| Variabel | Jenis data/satuan | Keterangan |
-|---|---|---|
-| Type | Kategori H, L, M | Jenis/kualitas produk |
-| Air temperature | Numerik, K | Suhu udara |
-| Process temperature | Numerik, K | Suhu proses |
-| Rotational speed | Numerik, rpm | Kecepatan rotasi |
-| Torque | Numerik, Nm | Torsi |
-| Tool wear | Numerik, menit | Keausan alat |
-| Machine failure | Biner, 0 atau 1 | Target kegagalan |
-
-UDI dan Product ID tidak dijadikan input. TWF, HDF, PWF, OSF, dan RNF juga tidak dipakai karena sudah menunjukkan jenis kegagalan dan bisa membocorkan jawaban yang ingin diprediksi model. Data ini bersifat sintetis, sehingga hasilnya belum mewakili semua kondisi mesin nyata.
-
-## 3. Cara Pengerjaan
-
-Kami membagi data sesuai urutan UDI: 6.000 baris untuk train, 2.000 untuk validation, dan 2.000 untuk test. UDI hanya dipakai sebagai acuan urutan, bukan waktu pengukuran yang pasti. Imputer dan StandardScaler dihitung dari train saja. Type diubah menjadi tiga kolom one-hot, sehingga total input NN menjadi delapan. Bobot kelas juga dihitung dari train untuk membantu model memperhatikan kasus kegagalan.
-
-Model awal memakai MLP 8–32–16–1 dengan ReLU dan output sigmoid. Pengaturannya adalah Adam, learning rate 0,001, batch size 128, maksimum 150 epoch, serta seed 42. Model terbaik dipilih dari log loss validation, dengan batas prediksi 0,5. Data test belum digunakan untuk memilih atau menilai model.
-
-## 4. Hasil Sementara
-
-Dari pemeriksaan awal, ada 9.661 baris tidak gagal dan 339 baris gagal. Tidak ditemukan nilai kosong atau baris duplikat. Berikut hasil model awal pada data validation.
-
-Hasil baseline MLP
-
-| Accuracy | Precision | Recall | F1-score |
-|---|---|---|---|
-| 96,10% | 30,12% | 55,56% | 0,3906 |
-
-Confusion matrix-nya adalah TN=1.897, FP=58, FN=20, dan TP=25. Artinya, 25 dari 45 kasus kegagalan berhasil dikenali, tetapi 20 kasus masih terlewat dan ada 58 false alarm. Jadi, meskipun akurasinya tinggi, hasil deteksi kegagalannya masih perlu diperbaiki.
-
-Script pengolahan data, model tersimpan, dan dashboard awal sudah tersedia di repository. Input manual dan unggah CSV sudah bisa menghasilkan prediksi secara lokal. Aplikasi belum di-deploy publik. Model ini memprediksi status kegagalan pada satu pengamatan, bukan sisa umur mesin.
-
-## 5. Pembagian Tugas Awal
-
-Usulan pembagian kerja
-
-| Anggota | Tanggung jawab |
+| Tahap | Alur dan status |
 |---|---|
-| Putri Cahaya Lestari | Pengolahan data, EDA, dan laporan |
-| Hendra Firmansyah | GA dan seleksi fitur |
-| Nur Rahmad | Baseline NN, PSO, dan evaluasi |
-| Ricky Alfian Ronaldo | Fuzzy, dashboard, dan deployment |
+| W12 · tersedia | UCI → validasi data → split → imputer/scaler/encoding → baseline MLP → prediksi Streamlit |
+| W13–W15 · rencana | Preprocessing → GA seleksi fitur → PSO hyperparameter → NN → Fuzzy → dashboard online |
 
-Pembagian kerja ini masih perlu disepakati bersama.
+Input akhir dashboard: kondisi mesin manual/CSV. Keluaran akhir yang direncanakan: probabilitas failure, subset sensor hasil GA, serta prioritas Normal / Inspection / Maintenance / Critical. Saat W12, keluaran yang berfungsi baru prediksi baseline.
 
-## 6. Rencana Selanjutnya
+## 3. Anggota dan usulan pembagian peran
 
-Minggu 13 akan difokuskan pada GA untuk memilih fitur. Minggu 14 dilanjutkan dengan PSO untuk mencari pengaturan NN dan membandingkan hasil model. Pada minggu 15, Fuzzy akan dipakai untuk menentukan prioritas Normal, Inspection, Maintenance, atau Critical, lalu dashboard di-deploy. Minggu 16 disiapkan untuk laporan akhir dan demo.
+| NIM · Nama | Usulan tanggung jawab |
+|---|---|
+| 04231072 · Putri Cahaya Lestari | Data, EDA, preprocessing dan dokumentasi |
+| 04231038 · Hendra Firmansyah | GA, fitness dan analisis subset fitur |
+| 04231070 · Nur Rahmad | Baseline NN, PSO dan evaluasi eksperimen |
+| 04221045 · Ricky Alfian Ronaldo | Fuzzy, integrasi Streamlit dan deployment |
 
-Data → Preprocessing → GA → PSO → NN → Fuzzy → Streamlit
+Pembagian peran di atas merupakan usulan, perlu disepakati anggota; bukan bukti kontribusi yang telah dilakukan. Setiap anggota tetap perlu memahami seluruh pipeline saat demo.
 
-Hal yang perlu diperhatikan adalah sedikitnya kasus kegagalan dan kemungkinan model terlalu menyesuaikan data validation. Karena itu, jumlah percobaan akan dibatasi dan dicatat, GA/PSO dijalankan dengan beberapa seed, dan data test tetap disimpan untuk evaluasi akhir.
+## 4. Data dictionary dan kebijakan input
+
+Sumber: AI4I 2020 Predictive Maintenance Dataset, UCI 601. File resmi memuat 10.000 observasi dan 14 kolom; hanya enam variabel dipakai sebagai input. Type di-one-hot menjadi tiga kolom, sehingga NN menerima delapan input.
+
+| Variabel | Tipe / satuan | Peran |
+|---|---|---|
+| Type | Kategori H/L/M | Input kualitas produk |
+| Air temperature [K] | Numerik / K | Input suhu udara |
+| Process temperature [K] | Numerik / K | Input suhu proses |
+| Rotational speed [rpm] | Numerik / rpm | Input kecepatan rotasi |
+| Torque [Nm] | Numerik / Nm | Input torsi |
+| Tool wear [min] | Numerik / menit | Input keausan alat |
+| Machine failure | Biner 0/1 | Target utama |
+| UDI; Product ID | Identitas | Dikeluarkan; UDI hanya untuk split |
+| TWF/HDF/PWF/OSF/RNF | Label jenis failure | Dikeluarkan untuk mencegah leakage |
+
+## 5. Temuan EDA dan kualitas data
+
+Ditemukan 0 sel kosong, 0 duplikasi baris penuh dan 0 duplikasi kombinasi enam fitur. Distribusi target: 9.661 non-failure (96,61%) dan 339 failure (3,39%). Imbalance perlu ditangani pada training; accuracy saja tidak cukup.
+
+![Grafik dari PDF sumber](eda/target_and_order.png)
+
+Grafik memperlihatkan proporsi kegagalan berbeda antarblok UDI. Karena suhu dibangkitkan dengan pola random walk dan urutan berpotensi berkorelasi, split tidak diacak. UDI bukan timestamp yang terverifikasi; evaluasi tetap tidak membuktikan generalisasi pada mesin atau periode nyata yang independen.
+
+Analisis lengkap tersedia pada W12/eda/: statistik numerik, missing values, korelasi, distribusi fitur, failure menurut Type, dan ringkasan JSON. Korelasi dipakai sebagai deskripsi, bukan dasar menyaring fitur dengan melihat test. Dataset bersifat sintetis sebagaimana keterangan UCI.
+
+## 6. Split aman dan preprocessing
+
+| Split | Rentang UDI | Baris | Failure |
+|---|---|---|---|
+| Train | 1–6000 | 6.000 | 255 (4,25%) |
+| Validation | 6001–8000 | 2.000 | 45 (2,25%) |
+| Test terkunci | 8001–10000 | 2.000 | 39 (1,95%) |
+
+Imputer median/mode dan StandardScaler fit hanya pada train. Type memakai kategori kamus H/L/M. Walaupun tidak ada missing values, imputer disimpan bersama model agar pipeline konsisten. Bobot kelas dihitung dari train: w(c)=n_train/(2 n_c), yaitu 0,5222 untuk kelas 0 dan 11,7647 untuk kelas 1; validation/test tidak di-resample.
+
+Manifest split menyimpan UDI untuk audit. Validation dipakai memilih checkpoint; threshold tetap 0,5. Test belum dihitung metriknya dan tidak digunakan untuk preprocessing, fitness, tuning atau checkpoint. EDA semua data merupakan audit deskriptif; pemilihan model tidak menggunakan statistik test.
+
+## 7. Baseline Neural Network dan hasil validasi
+
+MLP: 8 input → 32 ReLU → 16 ReLU → 1 sigmoid; 833 parameter. Adam, learning rate 0,001; batch 128; L2 0,0001; tanpa dropout; seed 42. Maksimum 150 epoch, patience 20 berdasarkan log loss validation; checkpoint terbaik epoch 150. Satu run awal; bukan hasil GA/PSO.
+
+| Model (validation) | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| Dummy selalu non-failure | 0,9775 | 0 | 0 | 0 |
+| MLP baseline | 0.9610 | 0.3012 | 0.5556 | 0.3906 |
+
+AP=0.4710; ROC AUC=0.9234; balanced accuracy=0.7629. Confusion matrix: TN=1.897, FP=58, FN=20, TP=25. Model menemukan 25 dari 45 failure, tetapi masih melewatkan 20 failure dan menghasilkan 58 false alarm. Hasil ini menunjukkan ruang perbaikan; belum ada klaim keunggulan optimasi.
+
+![Grafik dari PDF sumber](baseline/baseline_curves.png)
+
+Kurva loss train/validation di atas dihitung tanpa bobot agar dapat dibandingkan; pembaruan bobot NN tetap memakai class weights. Artefak baseline.joblib menyimpan preprocessing dan model untuk inference; hasil setelah reload diverifikasi sama.
+
+## 8. Rencana integrasi W13–W16
+
+| Minggu | Rencana teknis dan keluaran |
+|---|---|
+| 13 · GA | Kromosom 6 bit; Type satu grup. Tolak subset kosong. Fitness F1 validation dengan penalti jumlah fitur. Usulan populasi 20/generasi 15, crossover 0,8, mutation 1/6, elitism 2; seed 11/22/33. Tetapkan bobot penalti sebelum run; simpan convergence dan best/mean/std. |
+| 14 · PSO + NN | Optimasi lr (10^-4–10^-2), hidden units (16–128), dropout (0–0,5), batch (32/64/128). Implementasi pbest/gbest dan update posisi-kecepatan. Bandingkan empat konfigurasi, split/budget setara dan beberapa seed. |
+| 15 · FIS + deploy | Rancang Mamdani + centroid. Input usulan probabilitas failure, wear dan torque; output empat prioritas. Validasi membership/rules dan skenario ekstrem. Integrasi end-to-end dan URL Streamlit publik. |
+| 16 · UAS | Laporan final, slide, demo langsung, video, source, artefak dan bukti kontribusi nyata. Siapkan demo lokal sebagai cadangan. |
+
+Catatan dropout: MLPClassifier W12 tidak mendukung dropout. Pada W14 seluruh empat konfigurasi, termasuk baseline, akan dilatih ulang dengan backend NN yang mendukung dropout agar pembandingan konsisten. Search bounds di atas masih rancangan, bukan hasil pencarian.
+
+## 9. Risiko dan mitigasi
+
+Leakage: buang label jenis failure/ID, fit preprocessing hanya train, kunci test. Imbalance: class weights dari train dan evaluasi kelas positif. Overfitting validation: catat budget pencarian, beberapa seed dan evaluasi akhir sekali setelah model terkunci. Data sintetis dan urutan: jelaskan keterbatasan generalisasi. False alarm/FN: laporkan keduanya; threshold 0,5 belum dioptimalkan. Deployment: pin dependensi, simpan artefak dan uji URL publik tanpa login.
+
+## 10. Status pengumpulan dan reproduksi
+
+Tersedia: laporan 4 halaman; script EDA/preprocessing/baseline; statistik, grafik, manifest split, metrik validation, model tersimpan, README, requirements dan delapan area Streamlit. Prediksi manual/CSV memakai NN asli. GA/PSO/Fuzzy diberi status rencana.
+
+Kelas: B. Repository remote: https://github.com/putcah/tubes-kecerdasan-buatan-kelompok-1. Dashboard publik: BELUM DEPLOY. URL repository sudah dicantumkan; deployment publik belum dilakukan. W12 mengizinkan bukti aplikasi awal lokal; URL skeleton dicantumkan bila tersedia.
+
+Reproduksi (Python 3.12): pip install -r requirements.txt; python -m src.eda; python -m src.train_baseline --seed 42; streamlit run app.py. Unggah PDF progres dan URL repo ke Moodle; tenggat resmi mengikuti Moodle/pengampu.
 
 ## Sumber
 
-UCI Machine Learning Repository. (2020). AI4I 2020 Predictive Maintenance Dataset. https://doi.org/10.24432/C5HS5C.
-
-Panduan Deliverables Tugas Besar Kecerdasan Buatan Minggu 12–16. (2026). Dokumen mata kuliah TE2514031, Gasal 2026/2027.
-
-Tugas Besar Kecerdasan Buatan: 16 Kelompok UCI Streamlit. (2026). Dokumen mata kuliah TE2514031, Gasal 2026/2027.
+1. Panduan Deliverables Tubes KB Minggu 12–16 (PDF dosen), hlm. 1–3. 2. Tugas Besar KB 16 Kelompok UCI Streamlit (PDF dosen), hlm. 5 dan 9. 3. UCI AI4I 2020, DOI: 10.24432/C5HS5C (CC BY 4.0). https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset 4. Deployment resmi: https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app
