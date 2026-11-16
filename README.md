@@ -2,6 +2,8 @@
 
 Paket progres Minggu 12 mata kuliah TE2514031, Gasal 2026/2027. Data: AI4I 2020, UCI ID 601. Dashboard memakai **Streamlit asli**, model baseline memakai MLPClassifier (Neural Network).
 
+**Berkas pengumpulan:** [Laporan PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
+
 ## Jalankan cepat
 
 Gunakan Python **3.12**. Dari folder yang berisi `app.py`:
