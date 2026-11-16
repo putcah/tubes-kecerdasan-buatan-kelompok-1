@@ -1,4 +1,4 @@
-"""Membuat proposal awal W12 dalam format laporan mahasiswa (4 halaman)."""
+"""Membuat proposal awal W12 ringkas dalam format proposal progres (2 halaman)."""
 from build_w12_proposal import main
 
 if __name__ == '__main__':

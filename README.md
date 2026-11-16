@@ -2,18 +2,18 @@
 
 Paket progres Minggu 12 mata kuliah TE2514031, Gasal 2026/2027. Data: AI4I 2020, UCI ID 601. Dashboard memakai **Streamlit asli**, model baseline memakai MLPClassifier (Neural Network).
 
-**Berkas pengumpulan:** [Proposal PDF W12 (4 halaman)](W12/W12_Proposal_EDA.pdf) · [Proposal Word](W12/W12_Proposal_EDA.docx) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
+**Berkas pengumpulan:** [Proposal PDF W12 (2 halaman)](W12/W12_Proposal_EDA.pdf) · [Proposal Word](W12/W12_Proposal_EDA.docx) · [Checklist Moodle](PENGUMPULAN_W12.md) · [Cara deploy](DEPLOYMENT.md) · [Catatan presentasi](CATATAN_PRESENTASI.md)
 
 ## Proposal awal minggu 12
 
-Proposal utama sudah disusun ulang menjadi **4 halaman termasuk sampul**, sesuai batas 2–4 halaman pada panduan dosen. Identitas: Institut Teknologi Kalimantan, Kelompok 1, Kelas B.
+Proposal utama sudah disusun ulang menjadi **2 halaman**, sesuai batas 2–4 halaman pada panduan dosen. Identitas: Institut Teknologi Kalimantan, Kelompok 1, Kelas B.
 
 - [Unduh proposal Word yang dapat diedit](W12/W12_Proposal_EDA.docx)
 - [Buka proposal PDF untuk pengumpulan W12](W12/W12_Proposal_EDA.pdf)
 
-Susunannya adalah sampul, BAB I Pendahuluan, BAB II Metode Pengerjaan, serta BAB III Progres Awal dan Rencana Kerja, diikuti daftar pustaka. Isi mencakup tujuan, kamus data, arsitektur, split dan preprocessing, baseline NN, metrik, risiko, serta usulan pembagian tugas. Bahasa ditulis dalam paragraf yang langsung membahas pekerjaan kelompok. Tidak ada kata pengantar atau daftar isi agar dokumen tetap sesuai panjang yang diminta.
+Bagian isinya: Gambaran Tugas, Data yang Dipakai, Cara Pengerjaan, Hasil Sementara, Pembagian Tugas Awal, Rencana Selanjutnya, dan Sumber. Identitas kelompok langsung diletakkan di bagian atas. Bahasa dibuat lebih langsung seperti catatan proposal/progres mahasiswa; tidak memakai susunan BAB, kata pengantar, daftar isi, atau sampul terpisah. Tujuan, kamus data, arsitektur, split, preprocessing, metrik, risiko, dan pembagian peran tetap tercakup.
 
-Format: A4, Times New Roman 12, spasi isi 1,5, margin kiri 4 cm dan atas/kanan/bawah 3 cm. Tabel serta daftar pustaka memakai ukuran lebih kecil dan spasi tunggal. Sampul tidak diberi nomor; isi bernomor 1–3. Program studi dan fakultas tidak ditambahkan karena belum dikonfirmasi. Angka hasil awal berasal dari eksperimen yang tersimpan; GA, PSO, Fuzzy dan deployment publik masih dijelaskan sebagai rencana.
+Format: A4, Times New Roman 12, spasi isi 1,15, dan margin 2,5 cm. Tabel, identitas, serta sumber memakai ukuran lebih kecil dan spasi tunggal. Halaman bernomor 1–2. Program studi dan fakultas tidak ditambahkan karena belum dikonfirmasi. Angka hasil awal berasal dari eksperimen yang tersimpan; GA, PSO, Fuzzy dan deployment publik masih dijelaskan sebagai rencana.
 
 Teks yang bisa disalin tersedia pada [versi Markdown](W12/W12_Proposal_EDA.md). Untuk membuat ulang, pasang `requirements-report.txt` lalu jalankan `python tools/build_report.py`. Script membuat Word dan mengekspor PDF jika LibreOffice tersedia. Jika tidak, buka Word lalu gunakan Export/Save as PDF; periksa kembali jumlah halaman setelah mengedit.
 
@@ -54,7 +54,7 @@ python -m src.train_baseline --seed 42
 
 ## Isi paket
 
-- `W12/W12_Proposal_EDA.pdf` dan `.docx`: proposal awal 4 halaman termasuk sampul.
+- `W12/W12_Proposal_EDA.pdf` dan `.docx`: proposal progres ringkas 2 halaman.
 - `W12/W12_Proposal_EDA.md`: teks laporan yang dapat diedit.
 - `src/common.py`: kontrak enam fitur, checksum, split, preprocessing dan validasi input.
 - `src/eda.py`: unduh/checksum, ringkasan, statistik, missing values, grafik dan split manifest.

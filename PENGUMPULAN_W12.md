@@ -12,7 +12,7 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 - [x] Pipeline/model tersimpan dan hasil reload diverifikasi identik.
 - [x] Script modular, README dan requirements.
 - [x] Kerangka Streamlit dengan prediksi manual/CSV yang berfungsi.
-- [x] Proposal awal minggu 12 sebanyak 4 halaman termasuk sampul, dalam format laporan mahasiswa; PDF, Word, Markdown, dan script tersedia.
+- [x] Proposal progres minggu 12 sebanyak 2 halaman, dengan bahasa lebih langsung dan susunan sederhana tanpa BAB; PDF, Word, Markdown, dan script tersedia.
 - [x] Draf panjang sebelumnya dipisahkan sebagai arsip; dokumen pengumpulan utama adalah W12_Proposal_EDA.pdf.
 - [x] Usulan pembagian peran untuk disepakati anggota.
 
