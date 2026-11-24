@@ -1,4 +1,4 @@
-"""Dashboard W12: streamlit run app.py."""
+"""Dashboard progres proyek. Jalankan dengan streamlit run app.py."""
 import os
 os.environ.setdefault('MPLCONFIGDIR', '/tmp/tubes-kb-mpl')
 import json
@@ -11,15 +11,23 @@ st.set_page_config(page_title='K01 | Predictive Maintenance', page_icon='⚙️'
 st.markdown('''<style>.block-container{max-width:1200px;padding-top:4rem}
 [data-testid="stMetric"]{background:white;border:1px solid #dce5ed;border-radius:12px;padding:16px}
 h1,h2,h3{color:#142c42}</style>''', unsafe_allow_html=True)
-st.caption('KECERDASAN BUATAN · KELOMPOK 01 · PROGRES MINGGU 12')
+st.caption('Kecerdasan Buatan, Kelompok 1, Kelas B')
 st.title('Intelligent Predictive Maintenance')
-st.write('Eksplorasi kondisi mesin, evaluasi baseline MLP, dan simulasi risiko kegagalan.')
+st.write('Eksplorasi kondisi mesin, evaluasi model, dan seleksi fitur dengan GA.')
 
 @st.cache_data
 def data(): return load_data()
 
 @st.cache_resource
 def artifact(): return joblib.load(ROOT/'artifacts/baseline.joblib')
+
+GA_DIR = ROOT / 'W13' / 'hasil'
+
+
+@st.cache_data
+def ga_results():
+    return json.loads((GA_DIR / 'summary.json').read_text(encoding='utf-8'))
+
 
 try:
     df=data();bundle=artifact()
@@ -31,8 +39,8 @@ cfg=json.loads((ROOT/'project.json').read_text())
 meta=bundle['metadata'];val=meta['validation']
 menu=['Overview','Dataset Explorer','Neural Network','Prediction / Simulation','GA Optimization','PSO Optimization','Fuzzy Inference','Model Comparison']
 page=st.sidebar.radio('Halaman',menu)
-st.sidebar.success('W12 · EDA dan baseline tersedia')
-st.sidebar.caption('GA → W13 · PSO → W14 · Fuzzy & online → W15')
+st.sidebar.success('Progres minggu 13')
+st.sidebar.caption('PSO direncanakan pada W14, Fuzzy dan deployment pada W15.')
 st.sidebar.caption(f"Kelas: {cfg['class']}")
 
 if page=='Overview':
@@ -41,10 +49,9 @@ if page=='Overview':
     st.subheader('Tujuan sistem')
     st.write('Mengklasifikasikan kegagalan mesin dari jenis produk dan lima variabel operasi; tahap akhir mengubah probabilitas model menjadi prioritas perawatan.')
     st.code('UCI → preprocessing → GA → PSO → MLP → Fuzzy → Streamlit',language=None)
-    st.info('Saat ini: preprocessing + baseline MLP + dashboard. Komponen GA, PSO, dan Fuzzy masih rencana; keluaran simulasi adalah baseline.')
-    st.subheader('Anggota dan usulan tanggung jawab')
-    st.dataframe(pd.DataFrame(cfg['members']).rename(columns={'nim':'NIM','name':'Nama','proposed_role':'Usulan peran'}),hide_index=True,width='stretch')
-    st.caption('Pembagian ini usulan untuk dikonfirmasi kelompok; bukan catatan kontribusi yang sudah terjadi.')
+    st.info('Hasil seleksi fitur tersedia di GA Optimization. Model Comparison menampilkan perbandingan validasi dengan baseline pada tiga seed.')
+    st.subheader('Anggota dan tanggung jawab')
+    st.dataframe(pd.DataFrame(cfg['members']).rename(columns={'nim':'NIM','name':'Nama','proposed_role':'Tanggung jawab'}),hide_index=True,width='stretch')
     st.link_button('Dataset resmi UCI 601','https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset')
     st.warning('Dataset sintetis. Prediksi status kegagalan pada satu pengamatan, bukan estimasi sisa umur mesin. Skor probabilitas belum dikalibrasi untuk penggunaan industri.')
 
@@ -73,7 +80,7 @@ elif page=='Neural Network':
 
 elif page=='Prediction / Simulation':
     st.subheader('Simulasi baseline')
-    st.caption('Input harus berada dalam rentang dataset. Semua fitur dipakai pada baseline; sensor penting belum ditentukan GA.')
+    st.caption('Simulasi ini menggunakan baseline W12 dengan enam fitur. Hasil eksperimen subset tersedia di GA Optimization.')
     mode=st.radio('Cara input',['Manual','Upload CSV'],horizontal=True)
     def infer(frame):
         clean=validate_inputs(frame,df)
@@ -90,7 +97,7 @@ elif page=='Prediction / Simulation':
             out=infer(pd.DataFrame([values]));p=float(out.probability_failure.iloc[0])
             st.metric('Skor probabilitas kegagalan',f'{p:.2%}')
             st.write('Prediksi baseline: **'+('Failure' if p>=.5 else 'Non-failure')+'**')
-            st.info('Prioritas maintenance berbasis Fuzzy belum tersedia pada W12.')
+            st.info('Prioritas perawatan berbasis Fuzzy direncanakan pada minggu 15.')
     else:
         st.download_button('Unduh template CSV',df[FEATURES].head(3).to_csv(index=False),'template_input.csv','text/csv')
         upload=st.file_uploader('CSV dengan enam kolom input',type='csv')
@@ -102,10 +109,44 @@ elif page=='Prediction / Simulation':
             except (ValueError,KeyError,TypeError) as exc: st.error(f'Periksa CSV: {exc}')
 
 elif page=='GA Optimization':
-    st.subheader('Rencana W13 · seleksi fitur')
-    st.info('Belum dijalankan. Belum ada fitur terpilih atau kurva konvergensi GA.')
-    st.write('Kromosom 6 bit merepresentasikan enam variabel asli; Type dipilih sebagai satu grup encoding. Tolak kromosom kosong. Fitness: F1 validation dikurangi penalti ukuran subset; test tidak digunakan.')
-    st.write('Usulan awal: populasi 20, generasi 15, tournament 3, crossover 0,8, mutation 1/6, elitism 2, seed 11/22/33. Tetapkan bobot penalti dan budget sebelum eksperimen; laporkan best/mean/std.')
+    st.subheader('Seleksi fitur dengan Genetic Algorithm')
+    if not (GA_DIR / 'summary.json').exists():
+        st.info('Jalankan eksperimen GA untuk menghasilkan ringkasan dan grafik.')
+        st.code('python -m src.ga_feature_selection')
+        st.stop()
+    summary = ga_results()
+    selected = summary['selected']
+    st.write('Setiap bit mewakili satu variabel. Type dipilih sebagai satu kelompok, '
+             'termasuk seluruh kolom hasil pengkodeannya. Fitness dihitung dari '
+             'F1 validasi dikurangi penalti 0,02 × jumlah fitur / 6.')
+    columns = st.columns(3)
+    columns[0].metric('Kromosom terbaik', selected['chromosome'])
+    columns[1].metric('Fitur terpilih', f"{len(selected['features'])} dari 6")
+    columns[2].metric('Fitness terbaik', f"{selected['fitness']:.4f}")
+    st.caption('Urutan bit: ' + ', '.join(summary['chromosome_order']))
+    st.image(str(GA_DIR / 'convergence.png'), width='stretch')
+    st.caption('Kurva menunjukkan kandidat terbaik pada setiap generasi. '
+               'Nilai yang tetap menunjukkan bahwa belum ditemukan kandidat dengan fitness lebih tinggi.')
+    st.dataframe(pd.DataFrame([
+        {'Seed': run['seed'], 'Kromosom': run['ga']['chromosome'],
+         'Fitness': run['ga']['fitness'], 'F1 validasi': run['ga']['validation']['f1'],
+         'Jumlah fitur': len(run['ga']['features']),
+         'Subset unik dievaluasi': run['ga']['unique_evaluations']}
+        for run in summary['runs']
+    ]), hide_index=True, width='stretch')
+    stats = summary['fitness']
+    st.write(f"Fitness terbaik {stats['best']:.4f}, rata-rata {stats['mean']:.4f}, "
+             f"dan simpangan baku {stats['std']:.4f}.")
+    st.subheader('Fitur sebelum dan sesudah seleksi')
+    by_seed = {run['seed']: run['ga']['features'] for run in summary['runs']}
+    chosen_seed = st.selectbox('Seed untuk melihat fitur', list(by_seed),
+                               index=list(by_seed).index(selected['seed']))
+    st.dataframe(pd.DataFrame([
+        {'Fitur baseline': feature, 'Hasil GA': 'Terpilih' if feature in by_seed[chosen_seed] else 'Dikeluarkan'}
+        for feature in summary['chromosome_order']
+    ]), hide_index=True, width='stretch')
+    with st.expander('Pengaturan eksperimen'):
+        st.json(summary['config'])
 
 elif page=='PSO Optimization':
     st.subheader('Rencana W14 · optimasi MLP')
@@ -115,14 +156,26 @@ elif page=='PSO Optimization':
 
 elif page=='Fuzzy Inference':
     st.subheader('Rencana W15 · prioritas perawatan')
-    st.info('FIS belum diimplementasikan. Tidak ada keputusan Fuzzy yang dihitung pada W12.')
+    st.info('FIS direncanakan pada minggu 15.')
     st.write('Usulan input: probabilitas failure, tool wear dan torque. Output: Normal → Inspection → Maintenance → Critical. Mamdani, agregasi max dan centroid; membership/rules perlu diuji sebelum integrasi.')
     st.write('Contoh aturan rancangan: jika probabilitas tinggi dan tool wear tinggi maka Critical. Batas membership bukan hasil eksperimen W12.')
 
 elif page=='Model Comparison':
-    st.subheader('Status eksperimen pembanding')
-    rows=[{'Model':'A · Baseline NN','Status':'Selesai W12','Fitur':6,**{k:round(val[k],4) for k in ['accuracy','precision','recall','f1']}}]
-    rows += [{'Model':name,'Status':status,'Fitur':None,'accuracy':None,'precision':None,'recall':None,'f1':None} for name,status in [('B · GA+NN','Rencana W13'),('C · PSO+NN','Rencana W14'),('D · GA+PSO+NN','Rencana W14')]]
-    st.dataframe(pd.DataFrame(rows),hide_index=True,width='stretch')
-    st.write(f"Dummy selalu non-failure pada validation: accuracy {meta['dummy_validation']['accuracy']:.2%}, recall 0%, F1 0. Accuracy tinggi saja tidak menunjukkan kemampuan mendeteksi failure.")
-    st.caption('Fuzzy menjadi lapisan keputusan sistem E; tidak diasumsikan meningkatkan akurasi prediksi NN.')
+    st.subheader('Baseline NN dan GA + NN')
+    if (GA_DIR / 'summary.json').exists():
+        summary = ga_results()
+        labels = {'accuracy': 'Accuracy', 'precision': 'Precision', 'recall': 'Recall',
+                  'f1': 'F1', 'feature_count': 'Jumlah fitur',
+                  'fit_seconds': 'Latih model (detik)', 'search_seconds': 'Pencarian GA (detik)'}
+        st.dataframe(pd.DataFrame([
+            {'Model': name, **{label: round(results[key]['mean'], 4) for key, label in labels.items()}}
+            for name, results in summary['aggregate'].items()
+        ]), hide_index=True, width='stretch')
+        st.caption('Rata-rata pada seed 11, 22, dan 33. Waktu pencarian mencakup pelatihan kandidat. '
+                   'Validasi digunakan dalam pemilihan subset; data uji disimpan untuk evaluasi akhir.')
+        with st.expander('Hasil setiap seed'):
+            st.dataframe(pd.read_csv(GA_DIR / 'comparison.csv'), hide_index=True, width='stretch')
+    else:
+        st.info('Jalankan eksperimen GA untuk melihat perbandingan.')
+    st.caption('Model PSO + NN dan GA + PSO + NN direncanakan pada minggu 14.')
+    st.caption('Evaluasi prioritas perawatan berbasis Fuzzy dilakukan tersendiri pada tahap integrasi.')

@@ -1,0 +1,7 @@
+feature,baseline,ga
+Type,True,True
+Air temperature [K],True,True
+Process temperature [K],True,True
+Rotational speed [rpm],True,True
+Torque [Nm],True,True
+Tool wear [min],True,True

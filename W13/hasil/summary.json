@@ -1,0 +1,591 @@
+{
+  "dataset_sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+  "config": {
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "population": 20,
+    "generations": 15,
+    "tournament": 3,
+    "crossover_probability": 0.8,
+    "mutation_probability": 0.16666666666666666,
+    "elitism": 2,
+    "feature_penalty": 0.02
+  },
+  "chromosome_order": [
+    "Type",
+    "Air temperature [K]",
+    "Process temperature [K]",
+    "Rotational speed [rpm]",
+    "Torque [Nm]",
+    "Tool wear [min]"
+  ],
+  "split": {
+    "train_udi": [
+      1,
+      6000
+    ],
+    "validation_udi": [
+      6001,
+      8000
+    ],
+    "test_udi": [
+      8001,
+      10000
+    ]
+  },
+  "test_evaluated": false,
+  "threshold": 0.5,
+  "runs": [
+    {
+      "seed": 11,
+      "baseline": {
+        "model": "Baseline MLP (class-weighted)",
+        "seed": 11,
+        "threshold": 0.5,
+        "hidden_layers": [
+          32,
+          16
+        ],
+        "input_dimension": 8,
+        "parameter_count": 833,
+        "epochs_run": 148,
+        "best_epoch": 128,
+        "seconds": 5.285246583999992,
+        "class_weights": {
+          "0": 0.5221932114882507,
+          "1": 11.764705882352942
+        },
+        "validation": {
+          "accuracy": 0.9425,
+          "precision": 0.25,
+          "recall": 0.7777777777777778,
+          "f1": 0.3783783783783784,
+          "balanced_accuracy": 0.8620346689400398,
+          "average_precision": 0.6017745312397703,
+          "roc_auc": 0.9521682296106848,
+          "log_loss": 0.14861354525087558,
+          "confusion_matrix": [
+            [
+              1850,
+              105
+            ],
+            [
+              10,
+              35
+            ]
+          ]
+        },
+        "dummy_validation": {
+          "accuracy": 0.9775,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "confusion_matrix": [
+            [
+              1955,
+              0
+            ],
+            [
+              45,
+              0
+            ]
+          ]
+        },
+        "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+        "fit_seconds": 5.353382934999956
+      },
+      "ga": {
+        "model": "Baseline MLP (class-weighted)",
+        "seed": 11,
+        "threshold": 0.5,
+        "hidden_layers": [
+          32,
+          16
+        ],
+        "input_dimension": 4,
+        "parameter_count": 705,
+        "epochs_run": 150,
+        "best_epoch": 146,
+        "seconds": 4.1138328050000155,
+        "class_weights": {
+          "0": 0.5221932114882507,
+          "1": 11.764705882352942
+        },
+        "validation": {
+          "accuracy": 0.968,
+          "precision": 0.3698630136986301,
+          "recall": 0.6,
+          "f1": 0.4576271186440678,
+          "balanced_accuracy": 0.788235294117647,
+          "average_precision": 0.5044768977958037,
+          "roc_auc": 0.9386302926967889,
+          "log_loss": 0.10117521398117427,
+          "confusion_matrix": [
+            [
+              1909,
+              46
+            ],
+            [
+              18,
+              27
+            ]
+          ]
+        },
+        "dummy_validation": {
+          "accuracy": 0.9775,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "confusion_matrix": [
+            [
+              1955,
+              0
+            ],
+            [
+              45,
+              0
+            ]
+          ]
+        },
+        "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+        "fit_seconds": 4.126794318000066,
+        "features": [
+          "Air temperature [K]",
+          "Process temperature [K]",
+          "Torque [Nm]",
+          "Tool wear [min]"
+        ],
+        "fitness": 0.4442937853107345,
+        "chromosome": "011011",
+        "search_seconds": 160.926412524,
+        "unique_evaluations": 52
+      }
+    },
+    {
+      "seed": 22,
+      "baseline": {
+        "model": "Baseline MLP (class-weighted)",
+        "seed": 22,
+        "threshold": 0.5,
+        "hidden_layers": [
+          32,
+          16
+        ],
+        "input_dimension": 8,
+        "parameter_count": 833,
+        "epochs_run": 150,
+        "best_epoch": 150,
+        "seconds": 5.0782293030000005,
+        "class_weights": {
+          "0": 0.5221932114882507,
+          "1": 11.764705882352942
+        },
+        "validation": {
+          "accuracy": 0.965,
+          "precision": 0.3626373626373626,
+          "recall": 0.7333333333333333,
+          "f1": 0.4852941176470588,
+          "balanced_accuracy": 0.8518329070758738,
+          "average_precision": 0.6295628711873956,
+          "roc_auc": 0.9602159704461495,
+          "log_loss": 0.09463205004624717,
+          "confusion_matrix": [
+            [
+              1897,
+              58
+            ],
+            [
+              12,
+              33
+            ]
+          ]
+        },
+        "dummy_validation": {
+          "accuracy": 0.9775,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "confusion_matrix": [
+            [
+              1955,
+              0
+            ],
+            [
+              45,
+              0
+            ]
+          ]
+        },
+        "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+        "fit_seconds": 5.1272989470000425
+      },
+      "ga": {
+        "model": "Baseline MLP (class-weighted)",
+        "seed": 22,
+        "threshold": 0.5,
+        "hidden_layers": [
+          32,
+          16
+        ],
+        "input_dimension": 8,
+        "parameter_count": 833,
+        "epochs_run": 150,
+        "best_epoch": 150,
+        "seconds": 4.503285429000016,
+        "class_weights": {
+          "0": 0.5221932114882507,
+          "1": 11.764705882352942
+        },
+        "validation": {
+          "accuracy": 0.965,
+          "precision": 0.3626373626373626,
+          "recall": 0.7333333333333333,
+          "f1": 0.4852941176470588,
+          "balanced_accuracy": 0.8518329070758738,
+          "average_precision": 0.6295628711873956,
+          "roc_auc": 0.9602159704461495,
+          "log_loss": 0.09463205004624717,
+          "confusion_matrix": [
+            [
+              1897,
+              58
+            ],
+            [
+              12,
+              33
+            ]
+          ]
+        },
+        "dummy_validation": {
+          "accuracy": 0.9775,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "confusion_matrix": [
+            [
+              1955,
+              0
+            ],
+            [
+              45,
+              0
+            ]
+          ]
+        },
+        "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+        "fit_seconds": 4.524770109000087,
+        "features": [
+          "Type",
+          "Air temperature [K]",
+          "Process temperature [K]",
+          "Rotational speed [rpm]",
+          "Torque [Nm]",
+          "Tool wear [min]"
+        ],
+        "fitness": 0.4652941176470588,
+        "chromosome": "111111",
+        "search_seconds": 168.34834451700004,
+        "unique_evaluations": 52
+      }
+    },
+    {
+      "seed": 33,
+      "baseline": {
+        "model": "Baseline MLP (class-weighted)",
+        "seed": 33,
+        "threshold": 0.5,
+        "hidden_layers": [
+          32,
+          16
+        ],
+        "input_dimension": 8,
+        "parameter_count": 833,
+        "epochs_run": 150,
+        "best_epoch": 148,
+        "seconds": 5.204742568999961,
+        "class_weights": {
+          "0": 0.5221932114882507,
+          "1": 11.764705882352942
+        },
+        "validation": {
+          "accuracy": 0.952,
+          "precision": 0.2892561983471074,
+          "recall": 0.7777777777777778,
+          "f1": 0.42168674698795183,
+          "balanced_accuracy": 0.866894003978403,
+          "average_precision": 0.6664394664918005,
+          "roc_auc": 0.9519408922989485,
+          "log_loss": 0.12003301957906508,
+          "confusion_matrix": [
+            [
+              1869,
+              86
+            ],
+            [
+              10,
+              35
+            ]
+          ]
+        },
+        "dummy_validation": {
+          "accuracy": 0.9775,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "confusion_matrix": [
+            [
+              1955,
+              0
+            ],
+            [
+              45,
+              0
+            ]
+          ]
+        },
+        "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+        "fit_seconds": 5.30345219000003
+      },
+      "ga": {
+        "model": "Baseline MLP (class-weighted)",
+        "seed": 33,
+        "threshold": 0.5,
+        "hidden_layers": [
+          32,
+          16
+        ],
+        "input_dimension": 8,
+        "parameter_count": 833,
+        "epochs_run": 150,
+        "best_epoch": 148,
+        "seconds": 5.036775028000022,
+        "class_weights": {
+          "0": 0.5221932114882507,
+          "1": 11.764705882352942
+        },
+        "validation": {
+          "accuracy": 0.952,
+          "precision": 0.2892561983471074,
+          "recall": 0.7777777777777778,
+          "f1": 0.42168674698795183,
+          "balanced_accuracy": 0.866894003978403,
+          "average_precision": 0.6664394664918005,
+          "roc_auc": 0.9519408922989485,
+          "log_loss": 0.12003301957906508,
+          "confusion_matrix": [
+            [
+              1869,
+              86
+            ],
+            [
+              10,
+              35
+            ]
+          ]
+        },
+        "dummy_validation": {
+          "accuracy": 0.9775,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "confusion_matrix": [
+            [
+              1955,
+              0
+            ],
+            [
+              45,
+              0
+            ]
+          ]
+        },
+        "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+        "fit_seconds": 5.058532888999991,
+        "features": [
+          "Type",
+          "Air temperature [K]",
+          "Process temperature [K]",
+          "Rotational speed [rpm]",
+          "Torque [Nm]",
+          "Tool wear [min]"
+        ],
+        "fitness": 0.4016867469879518,
+        "chromosome": "111111",
+        "search_seconds": 161.31550810599998,
+        "unique_evaluations": 50
+      }
+    }
+  ],
+  "aggregate": {
+    "Baseline NN": {
+      "accuracy": {
+        "best": 0.965,
+        "mean": 0.9531666666666666,
+        "std": 0.011295279249904934
+      },
+      "precision": {
+        "best": 0.3626373626373626,
+        "mean": 0.30063118699482333,
+        "std": 0.05717374083027044
+      },
+      "recall": {
+        "best": 0.7777777777777778,
+        "mean": 0.762962962962963,
+        "std": 0.025660011963983403
+      },
+      "f1": {
+        "best": 0.4852941176470588,
+        "mean": 0.42845308100446305,
+        "std": 0.053778074369201435
+      },
+      "average_precision": {
+        "best": 0.6664394664918005,
+        "mean": 0.6325922896396555,
+        "std": 0.032438734483738484
+      },
+      "roc_auc": {
+        "best": 0.9602159704461495,
+        "mean": 0.9547750307852608,
+        "std": 0.004713362797239284
+      },
+      "feature_count": {
+        "best": 6.0,
+        "mean": 6.0,
+        "std": 0.0
+      },
+      "fit_seconds": {
+        "best": 5.353382934999956,
+        "mean": 5.26137802400001,
+        "std": 0.11876939416758113
+      },
+      "search_seconds": {
+        "best": 0.0,
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "GA + NN": {
+      "accuracy": {
+        "best": 0.968,
+        "mean": 0.9616666666666666,
+        "std": 0.008504900548115391
+      },
+      "precision": {
+        "best": 0.3698630136986301,
+        "mean": 0.3405855248943667,
+        "std": 0.0445990732096664
+      },
+      "recall": {
+        "best": 0.7777777777777778,
+        "mean": 0.7037037037037037,
+        "std": 0.09251848886516147
+      },
+      "f1": {
+        "best": 0.4852941176470588,
+        "mean": 0.45486932775969285,
+        "std": 0.03189323530880353
+      },
+      "average_precision": {
+        "best": 0.6664394664918005,
+        "mean": 0.6001597451583333,
+        "std": 0.08489037801695822
+      },
+      "roc_auc": {
+        "best": 0.9602159704461495,
+        "mean": 0.9502623851472957,
+        "std": 0.01089028974217044
+      },
+      "feature_count": {
+        "best": 6.0,
+        "mean": 5.333333333333333,
+        "std": 1.1547005383792517
+      },
+      "fit_seconds": {
+        "best": 5.058532888999991,
+        "mean": 4.570032438666715,
+        "std": 0.4675154543299973
+      },
+      "search_seconds": {
+        "best": 168.34834451700004,
+        "mean": 163.53008838233333,
+        "std": 4.177265011634162
+      }
+    }
+  },
+  "fitness": {
+    "best": 0.4652941176470588,
+    "mean": 0.4370915499819151,
+    "std": 0.03240954405480009
+  },
+  "selected": {
+    "model": "Baseline MLP (class-weighted)",
+    "seed": 22,
+    "threshold": 0.5,
+    "hidden_layers": [
+      32,
+      16
+    ],
+    "input_dimension": 8,
+    "parameter_count": 833,
+    "epochs_run": 150,
+    "best_epoch": 150,
+    "seconds": 4.503285429000016,
+    "class_weights": {
+      "0": 0.5221932114882507,
+      "1": 11.764705882352942
+    },
+    "validation": {
+      "accuracy": 0.965,
+      "precision": 0.3626373626373626,
+      "recall": 0.7333333333333333,
+      "f1": 0.4852941176470588,
+      "balanced_accuracy": 0.8518329070758738,
+      "average_precision": 0.6295628711873956,
+      "roc_auc": 0.9602159704461495,
+      "log_loss": 0.09463205004624717,
+      "confusion_matrix": [
+        [
+          1897,
+          58
+        ],
+        [
+          12,
+          33
+        ]
+      ]
+    },
+    "dummy_validation": {
+      "accuracy": 0.9775,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "confusion_matrix": [
+        [
+          1955,
+          0
+        ],
+        [
+          45,
+          0
+        ]
+      ]
+    },
+    "test_status": "LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning",
+    "fit_seconds": 4.524770109000087,
+    "features": [
+      "Type",
+      "Air temperature [K]",
+      "Process temperature [K]",
+      "Rotational speed [rpm]",
+      "Torque [Nm]",
+      "Tool wear [min]"
+    ],
+    "fitness": 0.4652941176470588,
+    "chromosome": "111111",
+    "search_seconds": 168.34834451700004,
+    "unique_evaluations": 52
+  }
+}

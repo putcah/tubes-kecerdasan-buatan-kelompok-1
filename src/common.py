@@ -43,12 +43,21 @@ def splits(df):
     """UDI sebagai proxy urutan, bukan bukti timestamp/mesin independen."""
     return {'train': df.iloc[:6000].copy(), 'validation': df.iloc[6000:8000].copy(), 'test': df.iloc[8000:].copy()}
 
-def make_preprocessor():
-    return ColumnTransformer([
-        ('numeric', Pipeline([('imputer', SimpleImputer(strategy='median')), ('scaler', StandardScaler())]), NUMERIC),
-        ('type', Pipeline([('imputer', SimpleImputer(strategy='most_frequent')),
-                           ('encoder', OneHotEncoder(categories=[['H', 'L', 'M']], handle_unknown='error', sparse_output=False))]), ['Type'])
-    ], remainder='drop')
+def make_preprocessor(features=FEATURES):
+    transformers = []
+    numeric = [column for column in NUMERIC if column in features]
+    if numeric:
+        transformers.append(('numeric', Pipeline([
+            ('imputer', SimpleImputer(strategy='median')), ('scaler', StandardScaler())
+        ]), numeric))
+    if 'Type' in features:
+        transformers.append(('type', Pipeline([
+            ('imputer', SimpleImputer(strategy='most_frequent')),
+            ('encoder', OneHotEncoder(categories=[['H', 'L', 'M']], handle_unknown='error', sparse_output=False))
+        ]), ['Type']))
+    if not transformers:
+        raise ValueError('Pilih minimal satu fitur masukan.')
+    return ColumnTransformer(transformers, remainder='drop')
 
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)

@@ -13,7 +13,7 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 - [x] Script modular, README dan requirements.
 - [x] Kerangka Streamlit dengan prediksi manual/CSV yang berfungsi.
 - [x] Proposal progres minggu 12 sebanyak 4 halaman dengan narasi akademik yang telah disunting; data, angka hasil, 6 tabel, dan 2 grafik tetap dipertahankan.
-- [x] Draf panjang sebelumnya dipisahkan sebagai arsip; dokumen pengumpulan utama adalah W12_Proposal_EDA.pdf.
+- [x] Draf panjang sebelumnya dipisahkan sebagai arsip; salinan yang dikumpulkan ada di M12_Kelompok_1_B.pdf.
 - [x] Usulan pembagian peran untuk disepakati anggota.
 
 ## Perlu diselesaikan sebelum submit
@@ -24,10 +24,10 @@ Tenggat sesuai Moodle/pengampu. Dokumen dosen meminta satu PDF progres dan satu 
 - [x] Kelas dan URL repo sudah dimasukkan. Narasi dapat disunting pada Word atau tools/proposal_narasi.json. Untuk membuat ulang, jalankan python tools/build_report.py; ekspor PDF otomatis memerlukan LibreOffice.
 - [ ] Jalankan `python -m src.eda` dan `streamlit run app.py` pada laptop kelompok.
 - [ ] Sertakan bukti dashboard awal dari `W12/bukti_dashboard/`; bila sudah deploy sertakan screenshot Incognito dan URL aktif.
-- [ ] Unggah **W12/W12_Proposal_EDA.pdf** dan **URL repository** ke Moodle. Jika formulir mengizinkan, sertakan URL dashboard atau bukti lokal.
+- [ ] Unggah **W12/M12_Kelompok_1_B.pdf** dan **URL repository** ke Moodle. Jika formulir mengizinkan, sertakan URL dashboard atau bukti lokal.
 
 ## Belum wajib diimplementasikan W12
 
 GA pada W13; PSO dan empat eksperimen pada W14; Fuzzy dan deployment publik pada W15. Tidak ada angka hasil optimasi atau keputusan Fuzzy fiktif. Kebutuhan dashboard dan deploy final tetap wajib dipenuhi.
 
-Jangan mengirim ZIP sebagai pengganti URL repository jika Moodle meminta tautan repo. Panduan `DEPLOYMENT.md` menjelaskan langkah dari file siap pakai menuju repo dan URL Streamlit publik.
+Jangan mengirim ZIP sebagai pengganti URL repository jika Moodle meminta tautan repo. Panduan [deployment](../DEPLOYMENT.md) menjelaskan langkah dari file siap pakai menuju repo dan URL Streamlit publik.

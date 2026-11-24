@@ -25,11 +25,10 @@ def metrics(y, probability):
             'average_precision':average_precision_score(y,probability), 'roc_auc':roc_auc_score(y,probability),
             'log_loss':log_loss(y,probability), 'confusion_matrix':confusion_matrix(y,pred,labels=[0,1]).tolist()}
 
-def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--seed',type=int,default=42)
-    args=parser.parse_args(); seed=args.seed
-    parts=splits(load_data());train,val=parts['train'],parts['validation']
-    pre=make_preprocessor();x=pre.fit_transform(train[FEATURES]);xv=pre.transform(val[FEATURES])
+def fit_mlp(train, val, features, seed):
+    """Latih MLP berbobot seperti W12 dengan fitur masukan yang diberikan."""
+    fit_start = time.perf_counter()
+    pre=make_preprocessor(features);x=pre.fit_transform(train[features]);xv=pre.transform(val[features])
     y=train[TARGET].to_numpy();yv=val[TARGET].to_numpy()
     # Bobot kelas dihitung HANYA pada train; jumlah bobot = jumlah baris train.
     counts=np.bincount(y);weights=len(y)/(2*counts[y])
@@ -49,7 +48,7 @@ def main():
             else: stale+=1
             if stale>=20: break
     pipeline=Pipeline([('preprocess',pre),('nn',best)])
-    prob=pipeline.predict_proba(val[FEATURES])[:,1]
+    prob=pipeline.predict_proba(val[features])[:,1]
     result={'model':'Baseline MLP (class-weighted)', 'seed':seed,'threshold':.5,
             'hidden_layers':[32,16],'input_dimension':int(x.shape[1]),
             'parameter_count':int(sum(w.size for w in best.coefs_)+sum(b.size for b in best.intercepts_)),
@@ -59,6 +58,15 @@ def main():
             'dummy_validation':{'accuracy':float((yv==0).mean()),'precision':0.,'recall':0.,'f1':0.,
                                 'confusion_matrix':confusion_matrix(yv,np.zeros_like(yv),labels=[0,1]).tolist()},
             'test_status':'LOCKED: tidak dievaluasi pada W12; tidak dipakai training/checkpoint/tuning'}
+    result['fit_seconds'] = time.perf_counter() - fit_start
+    return pipeline, prob, history, result
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--seed',type=int,default=42)
+    args=parser.parse_args()
+    parts=splits(load_data());train,val=parts['train'],parts['validation']
+    yv=val[TARGET].to_numpy()
+    pipeline, prob, history, result = fit_mlp(train, val, FEATURES, args.seed)
     out=ROOT/'W12/baseline';out.mkdir(parents=True,exist_ok=True)
     artifacts=ROOT/'artifacts';artifacts.mkdir(exist_ok=True)
     joblib.dump({'pipeline':pipeline,'features':FEATURES,'threshold':.5,'metadata':result},artifacts/'baseline.joblib')

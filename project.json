@@ -7,22 +7,17 @@
     {
       "nim": "04231072",
       "name": "Putri Cahaya Lestari",
-      "proposed_role": "Data, EDA, preprocessing dan dokumentasi"
+      "proposed_role": "Pengolahan data, laporan eksplorasi, dan pengembangan GA"
     },
     {
       "nim": "04231038",
       "name": "Hendra Firmansyah",
-      "proposed_role": "GA, fitness dan analisis subset fitur"
+      "proposed_role": "Neural Network, PSO, dan evaluasi model"
     },
     {
       "nim": "04231070",
       "name": "Nur Rahmad",
-      "proposed_role": "Baseline NN, PSO dan evaluasi eksperimen"
-    },
-    {
-      "nim": "04221045",
-      "name": "Ricky Alfian Ronaldo",
-      "proposed_role": "Fuzzy, integrasi Streamlit dan deployment"
+      "proposed_role": "Fuzzy Logic, dashboard, dan deployment"
     }
   ]
 }

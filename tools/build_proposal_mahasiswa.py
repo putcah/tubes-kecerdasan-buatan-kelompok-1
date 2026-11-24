@@ -15,7 +15,8 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'W12'
+OUT = ROOT / 'W12' / 'arsip'
+OUT.mkdir(parents=True, exist_ok=True)
 NAME = 'W12_Proposal_Progres_KelasB_Kelompok01'
 
 def main():
@@ -109,7 +110,7 @@ def main():
         par=d.add_paragraph();par.paragraph_format.first_line_indent=Cm(0);par.alignment=WD_ALIGN_PARAGRAPH.CENTER
         par.paragraph_format.keep_with_next=True;par.paragraph_format.line_spacing=1
         par.add_run().add_picture(str(ROOT/relative),width=Cm(width))
-        caption(text);md.append(f'![{text}]({relative.replace("W12/", "", 1)})')
+        caption(text);md.append(f'![{text}]({relative.replace("W12/", "../", 1)})')
     def numbering(section,fmt,start=1):
         section.footer.is_linked_to_previous=False
         prop=section._sectPr

@@ -206,7 +206,7 @@ Pemeriksaan dataset menunjukkan 9.661 baris non-failure (96,61%) dan 339 baris f
 
 Gambar 4.1 Distribusi target dan proporsi failure per blok UDI
 
-![Gambar 4.1 Distribusi target dan proporsi failure per blok UDI](eda/target_and_order.png)
+![Gambar 4.1 Distribusi target dan proporsi failure per blok UDI](../eda/target_and_order.png)
 
 Proporsi failure bervariasi antarblok UDI. Jumlah failure juga berbeda antara train, validation, dan test. Kondisi ini perlu dipertimbangkan ketika membaca hasil baseline dan menjadi alasan untuk tidak menyimpulkan kinerja hanya dari satu ukuran agregat. Statistik numerik, missing values, distribusi fitur, dan korelasi tersedia pada folder W12/eda di repository.
 
@@ -230,7 +230,7 @@ Tabel 4.2 Confusion matrix baseline pada validation
 
 Gambar 4.2 Kurva loss dan confusion matrix baseline
 
-![Gambar 4.2 Kurva loss dan confusion matrix baseline](baseline/baseline_curves.png)
+![Gambar 4.2 Kurva loss dan confusion matrix baseline](../baseline/baseline_curves.png)
 
 Baseline mendeteksi 25 dari 45 failure, sehingga recall mencapai 55,56%. Namun, 20 failure masih terlewat dan 58 non-failure menghasilkan false alarm. Precision sebesar 30,12% menunjukkan bahwa banyak prediksi positif belum sesuai dengan label aktual. Oleh karena itu, baseline ini merupakan titik awal, bukan model akhir dengan kinerja yang sudah memadai.
 
